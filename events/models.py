@@ -39,7 +39,10 @@ class Event(models.Model):
 
     def __str__(self):
         return self.title
-    
+
     def number_of_attendees(self):
         return self.attendees.count()
+
+    def category_verbose(self):
+        return dict(Event.CATEGORY_CHOICES)[self.category]
 

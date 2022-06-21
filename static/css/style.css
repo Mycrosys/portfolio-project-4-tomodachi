@@ -1,0 +1,58 @@
+body {
+    background-color: #f5f5f5;
+    font-family: 'Aleo', serif;
+}
+
+.brand {
+    font-family: 'Arimo', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #4a4a4a;
+}
+
+.navbar {
+    background-color: #D0DADC;
+    color: #4a4a4a;
+}
+
+.card {
+    border: 1px solid #000000;
+    margin: 10px;
+    background-color: transparent;
+}
+
+.category {
+    color: white;
+    margin: 4px;
+    text-transform: uppercase;
+    background-color: #E84610;
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.post-link {
+    text-decoration: none;
+    color: #445261;
+}
+
+.post-link:hover,
+.page-link {
+    color: #e81010;
+}
+
+.link {
+    color: #23BBBB;
+    text-decoration: none;
+}
+
+.link:hover,
+.link:active {
+    color: #445261;
+    text-decoration: underline;
+}
+
+.footer {
+    font-size: 1.5rem;
+    background-color: #D0DADC;
+    color: #4a4a4a;
+} 
