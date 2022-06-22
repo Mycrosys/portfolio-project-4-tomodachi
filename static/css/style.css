@@ -13,6 +13,12 @@ body {
 .navbar {
     background-color: #D0DADC;
     color: #4a4a4a;
+    margin: 0px;
+    padding: 5px;
+}
+
+.container-fluid {
+    padding: 0;
 }
 
 .card {

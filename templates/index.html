@@ -4,6 +4,37 @@
 
 <div class="container-fluid">
     <div class="row">
+        <div id="carouselIndex" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselIndex" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselIndex" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselIndex" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="https://res.cloudinary.com/mkiesel-cloudinary/image/upload/v1655879597/portfolio4/slider-cinema_fixmhc.jpg" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="https://res.cloudinary.com/mkiesel-cloudinary/image/upload/v1655879598/portfolio4/slider-gaming_bobub6.jpg" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="https://res.cloudinary.com/mkiesel-cloudinary/image/upload/v1655879597/portfolio4/slider-camping_ikm2ju.jpg" class="d-block w-100" alt="...">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselIndex" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselIndex" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        
+        
+    </div>
+        
+    <div class="row">
 
         <!-- Event Column -->
         <div class="col-12 mt-3 left">
@@ -49,4 +80,11 @@
     </nav>
     {% endif %}
 </div>
+<script>
+  var myCarousel = document.querySelector('#carouselIndex')
+  var carousel = new bootstrap.Carousel(myCarousel, {
+    interval: 4000,
+    pause: false,
+  })
+</script>
 {%endblock%}
