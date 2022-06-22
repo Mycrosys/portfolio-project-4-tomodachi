@@ -44,5 +44,5 @@ class Event(models.Model):
         return self.attendees.count()
 
     def category_verbose(self):
-        return dict(Event.CATEGORY_CHOICES)[self.category]
+        return dict(Event.CATEGORY_CHOICES)[self.category].lower()
 

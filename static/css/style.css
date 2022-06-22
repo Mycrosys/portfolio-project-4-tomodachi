@@ -21,6 +21,31 @@ body {
     padding: 0;
 }
 
+.index-headline {
+    text-align: center;
+    font-family: 'Arimo', sans-serif;
+    font-size: 1.7rem;
+    margin-top: 10px;
+}
+
+.aboutsite {
+    margin-bottom: 30px;
+    padding: 20px 40px 0px;
+    font-weight: bold;
+    font-style: italic;
+    
+}
+
+.aboutsite-headline {
+    font-family: 'Arimo', sans-serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.upcoming {
+    background-color: #ddedf3;
+}
+
 .card {
     border: 1px solid #000000;
     margin: 10px;
@@ -31,9 +56,28 @@ body {
     color: white;
     margin: 4px;
     text-transform: uppercase;
-    background-color: #E84610;
     font-size: 1rem;
     font-weight: 800;
+}
+
+.dinning {
+    background-color: #3f1a0e;
+}
+
+.camping {
+    background-color: #036b09;
+}
+
+.gaming {
+    background-color: #000a97;
+}
+
+.cinema {
+    background-color: #9b0303;
+}
+
+.sports {
+    background-color: #850073;
 }
 
 .post-link {
