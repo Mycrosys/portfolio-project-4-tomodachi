@@ -1,37 +1,39 @@
 {% extends 'base.html' %} {% block content %}
 
 {% if user.is_authenticated %}
-<div class="container h-100">
-    <div class="row align-items-center h-100">
-        <p class="event-headline"">Event Details</p>
-        <div class="col-6 mx-auto event-detail-text">
-            <p class="category-detail text-center {{ event.category_verbose }}">{{ event.category_verbose }}</p>
-            <!-- Event title -->
-            <h1>{{ event.title }}</h1>
-            <!-- Event author goes before the | the event's creation date goes after -->
-            <p>created by {{ event.author }} on {{ event.created_on }}</p>
-            <!-- Summary of the Event is displayed here -->
-            <hr>
-            <p>{{ event.summary | safe }}</p>
-            <hr>
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- Location and time of the Event is displayed here -->
-                    
-                    {% if event.location_online %}
-                    <p>Online Event: Yes</p>
-                    {% else %}
-                    <p>Online Event: No</p>
-                    {% endif %}
-                    
-                    <p>Location: {{ event.location_area }}</p>
-                    <p>Event starts at: {{ event.location_time }}</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mt-3 offset-md-2">
+            <p class="event-headline"">Event Details</p>
+            <div class="event-detail-text">
+                <p class="category-detail text-center {{ event.category_verbose }}">{{ event.category_verbose }}</p>
+                <!-- Event title -->
+                <h1>{{ event.title }}</h1>
+                <!-- Event author goes before the | the event's creation date goes after -->
+                <p>created by {{ event.author }} on {{ event.created_on }}</p>
+                <!-- Summary of the Event is displayed here -->
+                <hr>
+                <p>{{ event.summary | safe }}</p>
+                <hr>
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Location and time of the Event is displayed here -->
+                        
+                        {% if event.location_online %}
+                        <p>Online Event: Yes</p>
+                        {% else %}
+                        <p>Online Event: No</p>
+                        {% endif %}
+                        
+                        <p>Location: {{ event.location_area }}</p>
+                        <p>Event starts at: {{ event.location_time }}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- The number of Attendees is displayed here -->
-                    <strong class="text-secondary">Current number of Attendees: {{ event.number_of_attendees }} </strong>
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- The number of Attendees is displayed here -->
+                        <strong class="text-secondary">Current number of Attendees: {{ event.number_of_attendees }} </strong>
+                    </div>
                 </div>
             </div>
         </div>
@@ -39,9 +41,9 @@
 </div>
 
 {% else %}
-<div class="container h-100">
-    <div class="row align-items-center h-100">
-        <div class="col-6 mx-auto event-detail-text mt-5">
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mt-3 offset-md-2">
             <p>
                 You need to be logged in to view details. Please 
                 <a class="link" href="{{ login_url }}">log in</a> or 
