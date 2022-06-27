@@ -15,13 +15,13 @@
       
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="https://res.cloudinary.com/mkiesel-cloudinary/image/upload/v1655879597/portfolio4/slider-cinema_fixmhc.jpg" class="d-block w-100" alt="...">
+            <img src="https://res.cloudinary.com/mkiesel-cloudinary/image/upload/v1655879597/portfolio4/slider-cinema_fixmhc.jpg" class="d-block w-100" alt="A group of people enjoying a Movie in a Cinema.">
           </div>
           <div class="carousel-item">
-            <img src="https://res.cloudinary.com/mkiesel-cloudinary/image/upload/v1655879598/portfolio4/slider-gaming_bobub6.jpg" class="d-block w-100" alt="...">
+            <img src="https://res.cloudinary.com/mkiesel-cloudinary/image/upload/v1655879598/portfolio4/slider-gaming_bobub6.jpg" class="d-block w-100" alt="Two Girls on a couch playing videogames.">
           </div>
           <div class="carousel-item">
-            <img src="https://res.cloudinary.com/mkiesel-cloudinary/image/upload/v1655879597/portfolio4/slider-camping_ikm2ju.jpg" class="d-block w-100" alt="...">
+            <img src="https://res.cloudinary.com/mkiesel-cloudinary/image/upload/v1655879597/portfolio4/slider-camping_ikm2ju.jpg" class="d-block w-100" alt="Two Girls outside camping in front of a campfire.">
           </div>
         </div>
       
@@ -70,7 +70,7 @@
                 <div>
                   <p class="category text-center {{ event.category_verbose }}">{{ event.category_verbose }}</p>
                 </div>
-                <a href="#" class="post-link">
+                <a href="{% url 'event_detail' event.slug %}" class="post-link">
                   <h2 class="card-title">{{ event.title }}</h2>
                   <p class="card-text">{{ event.location_time }}</p>
                 </a>
