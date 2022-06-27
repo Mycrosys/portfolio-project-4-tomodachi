@@ -39,12 +39,17 @@
 </div>
 
 {% else %}
-<div class="container mt-3 mb-4">
-    <div class="row">
-        <p class="index-headline"">
-            You need to be logged in to view details. Please log in or register.<br>
-            You will be redirected to the Index Page in a few seconds.
-        </p>
+<div class="container h-100">
+    <div class="row align-items-center h-100">
+        <div class="col-6 mx-auto event-detail-text mt-5">
+            <p>
+                You need to be logged in to view details. Please 
+                <a class="link" href="{{ login_url }}">log in</a> or 
+                <a class="link" href="{{ signup_url }}">sign up</a> first.<br>
+                <hr>
+                You will be redirected to the Index Page in a few seconds.
+            </p>
+        </div>
     </div>
 </div>
 <script>
