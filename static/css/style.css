@@ -41,7 +41,7 @@ body {
     margin-left: 10px;
 }
 
-.container-fluid {
+.container-fluid, .container {
     padding: 0;
 }
 
@@ -160,12 +160,26 @@ body {
     background-color: #e81010;
     color: #fff;
     border: 1px solid #000;
+    font-weight: bold;
+}
+
+.btn-reset {
+    background-color: #4d42ee;
+    color: #fff;
+    border: 1px solid #000;
+    font-weight: bold;
 }
 
 .btn-signup:hover,
 .btn-signup:active {
     background-color: #fff;
     color: #e81010;
+}
+
+.btn-reset:hover,
+.btn-reset:active {
+    background-color: #fff;
+    color: #4d42ee;
 }
 
 .footer {

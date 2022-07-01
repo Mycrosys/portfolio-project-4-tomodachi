@@ -1,0 +1,44 @@
+{% extends 'base.html' %} {% block content %}
+
+{% load crispy_forms_tags %}
+
+{% if user.is_authenticated %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mt-1 offset-md-2">
+            <p class="event-headline"">Create Event</p>
+
+            <form method="POST">
+                {{ event_form | crispy }}
+                {% csrf_token %}
+                <br>
+                <input id="create-button" class="btn btn-signup" type="submit" value="Create Event">
+                <button id="reset-button" class="btn btn-reset" type="reset">Reset</button>
+            </form>
+            <br>
+        </div>
+    </div>
+</div>
+
+{% else %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mt-3 offset-md-2">
+            <p>
+                You need to be logged in to create Events. Please 
+                <a class="link" href="{{ login_url }}">log in</a> or 
+                <a class="link" href="{{ signup_url }}">sign up</a> first.<br>
+                <hr>
+                You will be redirected to the Index Page in a few seconds.
+            </p>
+        </div>
+    </div>
+</div>
+<script>
+    setTimeout(function(){
+       window.location.href = "{% url 'home' %}";
+    }, 8000);
+ </script>
+{% endif %}
+
+{% endblock content %}

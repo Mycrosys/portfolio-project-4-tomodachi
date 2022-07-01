@@ -1,8 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic, View
-from .models import Event
-from django.utils.timezone import datetime
 from django.utils import timezone
+from .models import Event
+from .forms import EventForm
 
 
 class EventList(generic.ListView):
@@ -11,7 +11,6 @@ class EventList(generic.ListView):
 
     def get_queryset(self):
         return Event.objects.order_by('location_time').filter(location_time__gt=timezone.now())
-
 
 
 class EventDetail(View):
@@ -28,7 +27,32 @@ class EventDetail(View):
             "event_detail.html",
             {
                 "event": event,
-                "attendee": attendee
             },
         )
 
+
+class EventCreate(View):
+
+    def get(self, request):
+        return render(
+            request,
+            "create_event.html",
+            {
+                "event_form": EventForm()
+            },
+        )
+
+    def post(self, request):
+        
+        event_form = EventForm(data=request.POST)
+        
+        if event_form.is_valid():
+            event_form.instance.author = request.user
+            event_form.instance.slug = event_form.instance.title.replace(" ", "-")
+            event = event_form.save()
+            event.attendees.add(request.user)
+
+        else:
+            event_form = EventForm()
+            
+        return redirect('home')
