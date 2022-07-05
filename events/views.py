@@ -52,7 +52,7 @@ class EventCreate(View):
         else:
             event_form = EventForm()
 
-        return redirect('home')
+        return redirect('my_events')
 
 
 class EventMy(generic.ListView):
@@ -70,3 +70,21 @@ class EventMy(generic.ListView):
                 "joined_events": joined_event,
             },
         )
+
+
+class EventRemoveAttendee(View):
+
+    def get(self, request, slug, *args, **kwargs):
+        queryset = Event.objects.order_by('location_time').filter(location_time__gt=timezone.now())
+        event = get_object_or_404(queryset, slug=slug)
+        event.attendees.remove(request.user)
+        return redirect('my_events')
+
+
+class EventAddAttendee(View):
+
+    def get(self, request, slug, *args, **kwargs):
+        queryset = Event.objects.order_by('location_time').filter(location_time__gt=timezone.now())
+        event = get_object_or_404(queryset, slug=slug)
+        event.attendees.add(request.user)
+        return redirect('my_events')

@@ -3,48 +3,77 @@
 {% if user.is_authenticated %}
 <div class="container">
     <div class="row">
-        <div class="col-md-8 mt-3 offset-md-2">
+        <div class="col-md-10 mt-3 offset-md-1">
             <p class="event-headline"">My Created Events</p>
-            <!-- Blog Entries Column -->
-            {% for event in created_events %}
+            <p class="text-center">Only Events that haven't started yet are shown.</p>
+            <!-- Created Events Column -->
             <div class="row">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <p class="category text-center {{ event.category_verbose }}">{{ event.category_verbose }}</p>
-                        <a href="{% url 'event_detail' event.slug %}" class="post-link">
+                {% for event in created_events %}
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <p class="category text-center {{ event.category_verbose }}">{{ event.category_verbose }}</p>
                             <h2 class="card-title">{{ event.title }}</h2>
-                        </a>
-                        <p class="card-text">{{ event.location_time}}
-                            <br>
-                            Attendees: {{ event.number_of_attendees }}
-                        </p>
+                            <p class="card-text">{{ event.location_time}}
+                                <br>
+                                Attendees: {{ event.number_of_attendees }}
+                            </p>
+                        </div>
                     </div>
+                    <p class="text-center">
+                        <a href="{% url 'event_detail' event.slug %}" class="post-link">
+                            <span class="btn btn-edit">View Details</span>
+                        </a>
+                        <a href="{% url 'event_detail' event.slug %}" class="post-link">
+                            <span class="btn btn-edit">Modify Event</span>
+                        </a>
+                    </p>
                 </div>
+                {% if forloop.counter|divisibleby:2 %}
             </div>
-            {% endfor %}
+            <div class="row">
+                {% endif %}
+                {% endfor %}
+            </div>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-8 mt-3 offset-md-2">
+        <div class="col-md-10 mt-3 offset-md-1">
             <p class="event-headline"">My Joined Events</p>
-            <!-- Blog Entries Column -->
-            {% for event in joined_events %}
+            <p class="text-center">Only Events that haven't started yet are shown.
+                You cannot leave an Event you have created. Please delete it instead.</p>
+            <!-- Joined Events Column -->
             <div class="row">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <p class="category text-center {{ event.category_verbose }}">{{ event.category_verbose }}</p>
-                        <a href="{% url 'event_detail' event.slug %}" class="post-link">
+                {% for event in joined_events %}
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <p class="category text-center {{ event.category_verbose }}">{{ event.category_verbose }}</p>
                             <h2 class="card-title">{{ event.title }}</h2>
-                        </a>
-                        <p class="card-text">{{ event.location_time}}
-                            <br>
-                            Attendees: {{ event.number_of_attendees }}
-                        </p>
+                            <p class="card-text">{{ event.location_time}}
+                                <br>
+                                Attendees: {{ event.number_of_attendees }}
+                            </p>
+                        </div>
                     </div>
+                    <p class="text-center">
+                        <a href="{% url 'event_detail' event.slug %}" class="post-link">
+                            <span class="btn btn-edit">View Details</span>
+                        </a>
+                        {% if not request.user == event.author %}
+                        <a href="{% url 'leave_event' event.slug %}" class="post-link">
+                            <span class="btn btn-edit">Leave Event</span>
+                        </a>
+                        {% endif %}  
+                    </p>
                 </div>
+                {% if forloop.counter|divisibleby:2 %}
             </div>
-            {% endfor %}
+            <div class="row">
+                {% endif %}
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>
