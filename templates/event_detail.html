@@ -41,6 +41,9 @@
                 <a href="{% url 'event_detail' event.slug %}" class="post-link">
                     <span class="btn btn-edit">Modify Event</span>
                 </a>
+                <a href="{% url 'delete_event' event.slug %}" class="post-link">
+                    <span class="btn btn-edit">Delete Event</span>
+                </a>
                 {% elif request.user not in event.attendees.all %}
                 <a href="{% url 'join_event' event.slug %}" class="post-link">
                     <span class="btn btn-edit">Join Event</span>

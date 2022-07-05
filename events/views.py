@@ -88,3 +88,12 @@ class EventAddAttendee(View):
         event = get_object_or_404(queryset, slug=slug)
         event.attendees.add(request.user)
         return redirect('my_events')
+
+
+class EventDelete(View):
+
+    def get(self, request, slug, *args, **kwargs):
+        queryset = Event.objects.order_by('location_time').filter(location_time__gt=timezone.now())
+        event = get_object_or_404(queryset, slug=slug)
+        event.delete()
+        return redirect('my_events')

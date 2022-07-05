@@ -163,6 +163,10 @@ body {
     font-weight: bold;
 }
 
+.btn-edit {
+    margin-bottom: 5px;
+}
+
 .btn-reset {
     background-color: #4d42ee;
     color: #fff;

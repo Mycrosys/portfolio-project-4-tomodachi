@@ -12,4 +12,6 @@ urlpatterns = [
          name='leave_event'),
     path('join/<slug:slug>/', views.EventAddAttendee.as_view(),
          name='join_event'),
+    path('delete/<slug:slug>/', views.EventDelete.as_view(),
+         name='delete_event'),
 ]
