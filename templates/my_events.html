@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-10 mt-3 offset-md-1">
-            <p class="event-headline"">My Created Events</p>
+            <p class="event-headline">My Created Events</p>
             <p class="text-center">Only Events that haven't started yet are shown.</p>
             <!-- Created Events Column -->
             <div class="row">
@@ -37,6 +37,8 @@
             </div>
             <div class="row">
                 {% endif %}
+                {% empty %}
+                <p class="text-center">You currently have no created Events.</p>
                 {% endfor %}
             </div>
         </div>
@@ -77,6 +79,8 @@
             </div>
             <div class="row">
                 {% endif %}
+                {% empty %}
+                <p class="text-center">You currently have no joined Events.</p>
                 {% endfor %}
             </div>
         </div>

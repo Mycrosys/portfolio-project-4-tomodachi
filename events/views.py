@@ -61,8 +61,9 @@ class EventCreate(View):
 
         if event_form.is_valid():
             event_form.instance.author = request.user
-            event_form.instance.slug = event_form.instance.title.replace(" ", "-")
             event = event_form.save()
+            event.slug = "eventid_" + str(event.id)
+            event.save()
             event.attendees.add(request.user)
 
         else:
