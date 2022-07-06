@@ -14,4 +14,6 @@ urlpatterns = [
          name='join_event'),
     path('delete/<slug:slug>/', views.EventDelete.as_view(),
          name='delete_event'),
+     path('edit/<slug:slug>/', views.EventEdit.as_view(),
+         name='edit_event'),
 ]

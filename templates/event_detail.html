@@ -38,7 +38,7 @@
             </div>
             <p class="text-center">
                 {% if request.user == event.author %}
-                <a href="{% url 'event_detail' event.slug %}" class="post-link">
+                <a href="{% url 'edit_event' event.slug %}" class="post-link">
                     <span class="btn btn-edit">Modify Event</span>
                 </a>
                 <a href="{% url 'delete_event' event.slug %}" class="post-link">

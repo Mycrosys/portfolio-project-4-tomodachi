@@ -15,7 +15,7 @@ class EventList(generic.ListView):
 
 class EventDetail(View):
 
-    def get(self, request, slug, *args, **kwargs):
+    def get(self, request, slug):
         queryset = Event.objects.order_by('location_time').filter(location_time__gt=timezone.now())
         event = get_object_or_404(queryset, slug=slug)
 
@@ -27,6 +27,22 @@ class EventDetail(View):
             },
         )
 
+
+class EventMy(generic.ListView):
+
+    def get(self, request):
+        queryset = Event.objects.order_by('location_time').filter(location_time__gt=timezone.now())
+        created_event = queryset.filter(author=self.request.user.id)
+        joined_event = queryset.filter(attendees=self.request.user.id)
+
+        return render(
+            request,
+            "my_events.html",
+            {
+                "created_events": created_event,
+                "joined_events": joined_event,
+            },
+        )
 
 class EventCreate(View):
 
@@ -55,26 +71,18 @@ class EventCreate(View):
         return redirect('my_events')
 
 
-class EventMy(generic.ListView):
+class EventDelete(View):
 
-    def get(self, request):
+    def get(self, request, slug):
         queryset = Event.objects.order_by('location_time').filter(location_time__gt=timezone.now())
-        created_event = queryset.filter(author=self.request.user.id)
-        joined_event = queryset.filter(attendees=self.request.user.id)
-
-        return render(
-            request,
-            "my_events.html",
-            {
-                "created_events": created_event,
-                "joined_events": joined_event,
-            },
-        )
+        event = get_object_or_404(queryset, slug=slug)
+        event.delete()
+        return redirect('my_events')
 
 
 class EventRemoveAttendee(View):
 
-    def get(self, request, slug, *args, **kwargs):
+    def get(self, request, slug):
         queryset = Event.objects.order_by('location_time').filter(location_time__gt=timezone.now())
         event = get_object_or_404(queryset, slug=slug)
         event.attendees.remove(request.user)
@@ -83,17 +91,40 @@ class EventRemoveAttendee(View):
 
 class EventAddAttendee(View):
 
-    def get(self, request, slug, *args, **kwargs):
+    def get(self, request, slug):
         queryset = Event.objects.order_by('location_time').filter(location_time__gt=timezone.now())
         event = get_object_or_404(queryset, slug=slug)
         event.attendees.add(request.user)
         return redirect('my_events')
 
 
-class EventDelete(View):
+class EventEdit(View):
 
-    def get(self, request, slug, *args, **kwargs):
+    def get(self, request, slug):
         queryset = Event.objects.order_by('location_time').filter(location_time__gt=timezone.now())
         event = get_object_or_404(queryset, slug=slug)
-        event.delete()
+        
+        event_form = EventForm(instance=event)
+        
+        return render(
+            request,
+            "edit_event.html",
+            {
+                "event_form": event_form
+            },
+        )
+    
+    def post(self, request, slug):
+        queryset = Event.objects.order_by('location_time').filter(location_time__gt=timezone.now())
+        event = get_object_or_404(queryset, slug=slug)
+
+        event_form = EventForm(data=request.POST, instance=event)
+
+        if event_form.is_valid():
+            event_form.instance.slug = event_form.instance.title.replace(" ", "-")
+            event = event_form.save()
+
+        else:
+            event_form = EventForm()
+
         return redirect('my_events')
