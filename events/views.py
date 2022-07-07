@@ -11,13 +11,15 @@ class EventList(generic.ListView):
     template_name = 'index.html'
 
     def get_queryset(self):
-        return Event.objects.order_by('location_time').filter(location_time__gt=timezone.now())
+        return Event.objects.order_by('location_time').filter(
+            location_time__gt=timezone.now())
 
 
 class EventDetail(View):
 
     def get(self, request, slug):
-        queryset = Event.objects.order_by('location_time').filter(location_time__gt=timezone.now())
+        queryset = Event.objects.order_by('location_time').filter(
+            location_time__gt=timezone.now())
         event = get_object_or_404(queryset, slug=slug)
 
         return render(
@@ -32,7 +34,8 @@ class EventDetail(View):
 class EventMy(generic.ListView):
 
     def get(self, request):
-        queryset = Event.objects.order_by('location_time').filter(location_time__gt=timezone.now())
+        queryset = Event.objects.order_by('location_time').filter(
+            location_time__gt=timezone.now())
         created_event = queryset.filter(author=self.request.user.id)
         joined_event = queryset.filter(attendees=self.request.user.id)
 
@@ -44,6 +47,7 @@ class EventMy(generic.ListView):
                 "joined_events": joined_event,
             },
         )
+
 
 class EventCreate(View):
 
@@ -80,15 +84,17 @@ class EventCreate(View):
 class EventDelete(View):
 
     def get(self, request, slug):
-        queryset = Event.objects.order_by('location_time').filter(location_time__gt=timezone.now())
+        queryset = Event.objects.order_by('location_time').filter(
+            location_time__gt=timezone.now())
         event = get_object_or_404(queryset, slug=slug)
-        if (request.user == event.author):
+        if request.user == event.author:
             feedback = "Successfully deleted Event " + event.title + "."
             event.delete()
             messages.add_message(request, messages.SUCCESS, feedback)
 
         else:
-            feedback = "You are not the owner of Event " + event.title + " and can't delete it."
+            feedback = "You are not the owner of Event " + event.title
+            feedback += " and can't delete it."
             messages.add_message(request, messages.ERROR, feedback)
 
         return redirect('my_events')
@@ -97,10 +103,12 @@ class EventDelete(View):
 class EventRemoveAttendee(View):
 
     def get(self, request, slug):
-        queryset = Event.objects.order_by('location_time').filter(location_time__gt=timezone.now())
+        queryset = Event.objects.order_by('location_time').filter(
+            location_time__gt=timezone.now())
         event = get_object_or_404(queryset, slug=slug)
         event.attendees.remove(request.user)
-        feedback = "You were successfully removed as Attendee from Event " + event.title + "."
+        feedback = "You were successfully removed as Attendee from Event "
+        feedback += event.title + "."
         messages.add_message(request, messages.SUCCESS, feedback)
         return redirect('my_events')
 
@@ -108,10 +116,12 @@ class EventRemoveAttendee(View):
 class EventAddAttendee(View):
 
     def get(self, request, slug):
-        queryset = Event.objects.order_by('location_time').filter(location_time__gt=timezone.now())
+        queryset = Event.objects.order_by('location_time').filter(
+            location_time__gt=timezone.now())
         event = get_object_or_404(queryset, slug=slug)
         event.attendees.add(request.user)
-        feedback = "You were successfully added as Attendee for Event " + event.title + "."
+        feedback = "You were successfully added as Attendee for Event "
+        feedback += event.title + "."
         messages.add_message(request, messages.SUCCESS, feedback)
         return redirect('my_events')
 
@@ -119,11 +129,12 @@ class EventAddAttendee(View):
 class EventEdit(View):
 
     def get(self, request, slug):
-        queryset = Event.objects.order_by('location_time').filter(location_time__gt=timezone.now())
+        queryset = Event.objects.order_by('location_time').filter(
+            location_time__gt=timezone.now())
         event = get_object_or_404(queryset, slug=slug)
-        
+
         event_form = EventForm(instance=event)
-        
+
         return render(
             request,
             "edit_event.html",
@@ -131,15 +142,15 @@ class EventEdit(View):
                 "event_form": event_form
             },
         )
-    
+
     def post(self, request, slug):
-        queryset = Event.objects.order_by('location_time').filter(location_time__gt=timezone.now())
+        queryset = Event.objects.order_by('location_time').filter(
+            location_time__gt=timezone.now())
         event = get_object_or_404(queryset, slug=slug)
 
         event_form = EventForm(data=request.POST, instance=event)
 
         if event_form.is_valid():
-            event_form.instance.slug = event_form.instance.title.replace(" ", "-")
             event = event_form.save()
             feedback = "Successfully modified Event " + event.title + "."
             messages.add_message(request, messages.SUCCESS, feedback)
