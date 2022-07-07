@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic, View
 from django.utils import timezone
+from django.contrib import messages
 from .models import Event
 from .forms import EventForm
 
@@ -65,8 +66,12 @@ class EventCreate(View):
             event.slug = "eventid_" + str(event.id)
             event.save()
             event.attendees.add(request.user)
+            feedback = "Successfully created Event " + event.title + "."
+            messages.add_message(request, messages.SUCCESS, feedback)
 
         else:
+            feedback = "Submission invalid. Please try again."
+            messages.add_message(request, messages.ERROR, feedback)
             event_form = EventForm()
 
         return redirect('my_events')
@@ -77,7 +82,15 @@ class EventDelete(View):
     def get(self, request, slug):
         queryset = Event.objects.order_by('location_time').filter(location_time__gt=timezone.now())
         event = get_object_or_404(queryset, slug=slug)
-        event.delete()
+        if (request.user == event.author):
+            feedback = "Successfully deleted Event " + event.title + "."
+            event.delete()
+            messages.add_message(request, messages.SUCCESS, feedback)
+
+        else:
+            feedback = "You are not the owner of Event " + event.title + " and can't delete it."
+            messages.add_message(request, messages.ERROR, feedback)
+
         return redirect('my_events')
 
 
@@ -87,6 +100,8 @@ class EventRemoveAttendee(View):
         queryset = Event.objects.order_by('location_time').filter(location_time__gt=timezone.now())
         event = get_object_or_404(queryset, slug=slug)
         event.attendees.remove(request.user)
+        feedback = "You were successfully removed as Attendee from Event " + event.title + "."
+        messages.add_message(request, messages.SUCCESS, feedback)
         return redirect('my_events')
 
 
@@ -96,6 +111,8 @@ class EventAddAttendee(View):
         queryset = Event.objects.order_by('location_time').filter(location_time__gt=timezone.now())
         event = get_object_or_404(queryset, slug=slug)
         event.attendees.add(request.user)
+        feedback = "You were successfully added as Attendee for Event " + event.title + "."
+        messages.add_message(request, messages.SUCCESS, feedback)
         return redirect('my_events')
 
 
@@ -124,6 +141,8 @@ class EventEdit(View):
         if event_form.is_valid():
             event_form.instance.slug = event_form.instance.title.replace(" ", "-")
             event = event_form.save()
+            feedback = "Successfully modified Event " + event.title + "."
+            messages.add_message(request, messages.SUCCESS, feedback)
 
         else:
             event_form = EventForm()
