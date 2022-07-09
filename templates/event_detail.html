@@ -1,5 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 
+<!-- User needs to be Authenticated to see Event details -->
 {% if user.is_authenticated %}
 <div class="container">
     <div class="row">
@@ -11,6 +12,7 @@
                 <h1>{{ event.title }}</h1>
                 <!-- Event author goes before the | the event's creation date goes after -->
                 <p>created by {{ event.author }} on {{ event.created_on }}</p>
+                <p>Last modified on: {{ event.modified_on }}</p>
                 <!-- Summary of the Event is displayed here -->
                 <hr>
                 <p>{{ event.summary | safe }}</p>
@@ -37,6 +39,7 @@
                 </div>
             </div>
             <p class="text-center">
+                <!-- If the author is viewing the Event, offer Modify and Delete Button -->
                 {% if request.user == event.author %}
                 <a href="{% url 'edit_event' event.id %}" class="post-link">
                     <span class="btn btn-edit">Modify Event</span>
@@ -44,6 +47,8 @@
                 <button type="button" class="btn btn-edit" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     Delete Event
                 </button>
+                
+                <!-- If someone that has not yet joined the Event is viewing, offer Join Event Button -->
                 {% elif request.user not in event.attendees.all %}
                 <a href="{% url 'join_event' event.id %}" class="post-link">
                     <span class="btn btn-edit">Join Event</span>
@@ -68,7 +73,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary btn-edit" data-bs-dismiss="modal">Cancel</button>
-                <button class="btn btn-edit" onclick="deleteEvent()">
+                <button class="btn btn-edit" onclick="location.href='{% url 'delete_event' event.id %}'">
                     Delete Event
                   </button>
             </div>
@@ -76,13 +81,7 @@
     </div>
 </div>
 
-<script>
-    function deleteEvent() {
-        window.location.href = "{% url 'delete_event' event.id %}";
-    }
-</script>
-
-
+<!-- If User is not authenticated, display message to signup/register and then redirect to home -->
 {% else %}
 <div class="container">
     <div class="row">

@@ -11,6 +11,7 @@ class EventList(generic.ListView):
     template_name = 'index.html'
 
     def get_queryset(self):
+        # Filter Events to only the ones that happen now and in the future
         return Event.objects.order_by('location_time').filter(
             location_time__gt=timezone.now())
 
@@ -18,8 +19,10 @@ class EventList(generic.ListView):
 class EventDetail(View):
 
     def get(self, request, pk):
+        # Filter Events to only the ones that happen now and in the future
         queryset = Event.objects.order_by('location_time').filter(
             location_time__gt=timezone.now())
+        # Use the Event ID to get the correct Event
         event = get_object_or_404(queryset, pk=pk)
 
         return render(
@@ -34,9 +37,12 @@ class EventDetail(View):
 class EventMy(View):
 
     def get(self, request):
+        # Filter Events to only the ones that happen now and in the future
         queryset = Event.objects.order_by('location_time').filter(
             location_time__gt=timezone.now())
+        # Created Events are the ones the logged in user is the author
         created_event = queryset.filter(author=self.request.user.id)
+        # Joined Events are the ones the logged in user is an attendee
         joined_event = queryset.filter(attendees=self.request.user.id)
 
         return render(
@@ -62,77 +68,119 @@ class EventCreate(View):
 
     def post(self, request):
 
+        # Get the Values from the Event Form
         event_form = EventForm(data=request.POST)
 
+        # Check if form is valid
         if event_form.is_valid():
+            # Set the author to the logged in user
             event_form.instance.author = request.user
+            # Save the form to create an Event ID automatically
+            # The Event ID is only created with saving,
+            # so this is a necessary step
             event = event_form.save()
+            # Create the slug out of the Event ID and a string
             event.slug = "eventid_" + str(event.id)
+            # Save it again
             event.save()
+            # Add the current User as Attendee (required)
             event.attendees.add(request.user)
+            # Create a feedback message that the Event was created
             feedback = "Successfully created Event " + event.title + "."
             messages.add_message(request, messages.SUCCESS, feedback)
 
         else:
+            # If the form is not valid, create and display an Error message
             feedback = "Submission invalid. Please try again."
             messages.add_message(request, messages.ERROR, feedback)
-            event_form = EventForm()
-
+            
+        # redirect to My Events
         return redirect('my_events')
 
 
 class EventDelete(View):
 
     def get(self, request, pk):
+        # Filter Events to only the ones that happen now and in the future
         queryset = Event.objects.order_by('location_time').filter(
             location_time__gt=timezone.now())
+        
+        # Use the Event ID to get the correct Event
         event = get_object_or_404(queryset, pk=pk)
+        
+        # Event Deletion only allowed for event creator so check that
         if request.user == event.author:
+            # Create a feedback message that the Event was deleted
+            # and delete the Event
             feedback = "Successfully deleted Event " + event.title + "."
             event.delete()
             messages.add_message(request, messages.SUCCESS, feedback)
 
         else:
+            # Create a feedback message that the Event was not deleted
             feedback = "You are not the owner of Event " + event.title
             feedback += " and can't delete it."
             messages.add_message(request, messages.ERROR, feedback)
 
+        # redirect to My Events
         return redirect('my_events')
 
 
 class EventRemoveAttendee(View):
 
     def get(self, request, pk):
+        # Filter Events to only the ones that happen now and in the future
         queryset = Event.objects.order_by('location_time').filter(
             location_time__gt=timezone.now())
+
+        # Use the Event ID to get the correct Event
         event = get_object_or_404(queryset, pk=pk)
+
+        # Remove the current logged in User from the list of attendees
         event.attendees.remove(request.user)
+
+        # Create a feedback message that User was removed from attendees
         feedback = "You were successfully removed as Attendee from Event "
         feedback += event.title + "."
         messages.add_message(request, messages.SUCCESS, feedback)
+
+        # redirect to My Events
         return redirect('my_events')
 
 
 class EventAddAttendee(View):
 
     def get(self, request, pk):
+        # Filter Events to only the ones that happen now and in the future
         queryset = Event.objects.order_by('location_time').filter(
             location_time__gt=timezone.now())
+
+        # Use the Event ID to get the correct Event
         event = get_object_or_404(queryset, pk=pk)
+
+        # Add the current logged in User to the list of attendees
         event.attendees.add(request.user)
+
+        # Create a feedback message that User was added to attendees
         feedback = "You were successfully added as Attendee for Event "
         feedback += event.title + "."
         messages.add_message(request, messages.SUCCESS, feedback)
+
+        # redirect to My Events
         return redirect('my_events')
 
 
 class EventEdit(View):
 
     def get(self, request, pk):
+        # Filter Events to only the ones that happen now and in the future
         queryset = Event.objects.order_by('location_time').filter(
             location_time__gt=timezone.now())
+        
+        # Use the Event ID to get the correct Event
         event = get_object_or_404(queryset, pk=pk)
 
+        # Get and fill the Event Form with the Data from the Event
         event_form = EventForm(instance=event)
 
         return render(
@@ -144,20 +192,34 @@ class EventEdit(View):
         )
 
     def post(self, request, pk):
+        # Filter Events to only the ones that happen now and in the future
         queryset = Event.objects.order_by('location_time').filter(
             location_time__gt=timezone.now())
+        
+        # Use the Event ID to get the correct Event
         event = get_object_or_404(queryset, pk=pk)
 
+        # Get the Values from the Event Form
         event_form = EventForm(data=request.POST, instance=event)
 
+        # Check if form is valid
         if event_form.is_valid():
+            # Save the form to create an Event ID automatically
             event = event_form.save()
+            # This step isn't actually needed, but it is done to fix
+            # Slugs created by Events in the Admin Panel
+            # All Events created via the Form on the Website already
+            # have the correct slug
             event.slug = "eventid_" + str(event.id)
             event.save()
+            # Create a feedback message that the Event was updated
             feedback = "Successfully modified Event " + event.title + "."
             messages.add_message(request, messages.SUCCESS, feedback)
 
         else:
-            event_form = EventForm()
+            # If the form is not valid, create and display an Error message
+            feedback = "Submission invalid. Please try again."
+            messages.add_message(request, messages.ERROR, feedback)
 
+        # redirect to My Events
         return redirect('my_events')

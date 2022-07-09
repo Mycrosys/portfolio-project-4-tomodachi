@@ -1,5 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 
+<!-- User needs to be Authenticated to see My Events -->
 {% if user.is_authenticated %}
 <div class="container">
     <div class="row">
@@ -12,14 +13,18 @@
                 <div class="col-md-6">
                     <div class="card mb-4">
                         <div class="card-body">
+                            <!-- Display Category with color coded background -->
                             <p class="category text-center {{ event.category_verbose }}">{{ event.category_verbose }}</p>
+                            
+                            <!-- Display basic quick event infos for overview -->
                             <h2 class="card-title">{{ event.title }}</h2>
                             <p class="card-text">{{ event.location_time}}
                                 <br>
                                 Attendees: {{ event.number_of_attendees }}
                             </p>
                         </div>
-                    
+                        
+                        <!-- Display buttons for opening detail view, modify event or event deletion -->
                         <p class="text-center">
                             <a href="{% url 'event_detail' event.id %}" class="post-link">
                                 <span class="btn btn-edit">View Details</span>
@@ -48,7 +53,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary btn-edit" data-bs-dismiss="modal">Cancel</button>
-                                <button class="btn btn-edit" value={{event.id}} onclick="location.href='{% url 'delete_event' event.id %}'">
+                                <button class="btn btn-edit" onclick="location.href='{% url 'delete_event' event.id %}'">
                                     Delete Event
                                 </button>
                             </div>
@@ -56,10 +61,13 @@
                     </div>
                 </div>
                 
+                <!-- Limit to 2 Events side by side, then next row -->
                 {% if forloop.counter|divisibleby:2 %}
             </div>
             <div class="row">
                 {% endif %}
+                
+                <!-- Display text if viewer has no created events that start now or in the future -->
                 {% empty %}
                 <p class="text-center">You currently have no created Events.</p>
                 {% endfor %}
@@ -78,18 +86,24 @@
                 <div class="col-md-6">
                     <div class="card mb-4">
                         <div class="card-body">
+                            <!-- Display Category with color coded background -->
                             <p class="category text-center {{ event.category_verbose }}">{{ event.category_verbose }}</p>
+                            
+                            <!-- Display basic quick event infos for overview -->
                             <h2 class="card-title">{{ event.title }}</h2>
                             <p class="card-text">{{ event.location_time}}
                                 <br>
                                 Attendees: {{ event.number_of_attendees }}
                             </p>
                         </div>
-                    
+                        
+                        <!-- Display buttons for opening detail view -->
                         <p class="text-center">
                             <a href="{% url 'event_detail' event.id %}" class="post-link">
                                 <span class="btn btn-edit">View Details</span>
                             </a>
+                            
+                            <!-- Display buttons for leaving an event if you are not the author of it -->
                             {% if not request.user == event.author %}
                             <a href="{% url 'leave_event' event.id %}" class="post-link">
                                 <span class="btn btn-edit">Leave Event</span>
@@ -102,6 +116,8 @@
             </div>
             <div class="row">
                 {% endif %}
+                
+                <!-- Display text if viewer has no joined events that start now or in the future -->
                 {% empty %}
                 <p class="text-center">You currently have no joined Events.</p>
                 {% endfor %}
@@ -110,6 +126,7 @@
     </div>
 </div>
 
+<!-- If User is not authenticated, display message to signup/register and then redirect to home -->
 {% else %}
 <div class="container">
     <div class="row">

@@ -2,6 +2,7 @@
 
 {% load crispy_forms_tags %}
 
+<!-- User needs to be Authenticated to Modify Events -->
 {% if user.is_authenticated %}
 <div class="container">
     <div class="row">
@@ -19,6 +20,7 @@
     </div>
 </div>
 
+<!-- If User is not authenticated, display message to signup/register and then redirect to home -->
 {% else %}
 <div class="container">
     <div class="row">

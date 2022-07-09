@@ -3,12 +3,14 @@
 {% load crispy_forms_tags %}
 {% load static %}
 
+<!-- User needs to be Authenticated to Create Events -->
 {% if user.is_authenticated %}
 <div class="container">
     <div class="row">
         <div class="col-md-8 mt-1 offset-md-2">
             <p class="event-headline"">Create Event</p>
 
+            <!-- Load Eventform from forms.py with crispyforms -->
             <form method="POST">
                 {{ event_form | crispy }}
                 {% csrf_token %}
@@ -21,8 +23,10 @@
     </div>
 </div>
 
+<!-- Load Script to update the min time for the Event starttime to now + 12 hours -->
 <script src="{% static 'js/formupdate.js' %}"></script>
 
+<!-- If User is not authenticated, display message to signup/register and then redirect to home -->
 {% else %}
 <div class="container">
     <div class="row">
