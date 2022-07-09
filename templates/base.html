@@ -32,6 +32,21 @@
 
     {% include 'navbar.html' %}
 
+    <div class="container-fluid notification">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                {% for message in messages %}
+                <div class="alert {{ message.tags }} alert-dismissible fade show text-center" id="msg"
+                role="alert">
+                {{ message | safe }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                </button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    
     <main class="flex-shrink-0">
         {% block content %}
         <!-- Content Goes here -->
@@ -45,14 +60,17 @@
             <i class="fa-brands fa-twitter-square ms-3"></i>
             <i class="fa-brands fa-instagram-square ms-3"></i>
             <i class="fa-brands fa-youtube-square ms-3"></i>
-            <i class="fa-brands fa-twitch ms-3"></i></p>
+            <i class="fa-brands fa-twitch ms-3"></i>
+        </p>
     </footer>
     <script>
-        setTimeout(function() {
-            let messages = document.getElementById("msg");
-            let alert = new bootstrap.Alert(messages);
-            alert.close();
-        }, 3000);   
+        const alerts = document.querySelectorAll('[class*="alert-"]')
+        for (const alert of alerts) {
+            setTimeout( function() {
+                const bootstrapAlert = bootstrap.Alert.getOrCreateInstance(alert);
+                bootstrapAlert.close();
+            }, 4000);
+        }
     </script>
 </body>
 

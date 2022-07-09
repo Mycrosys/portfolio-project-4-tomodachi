@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 mt-1 offset-md-2">
-            <p class="event-headline"">Modify Event</p>
+            <p class="event-headline">Modify Event</p>
 
             <form method="POST">
                 {{ event_form | crispy }}
@@ -23,11 +23,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 mt-3 offset-md-2">
-            <p>
-                You need to be logged in to create Events. Please 
+            <p>You need to be logged in to create Events. Please 
                 <a class="link" href="{{ login_url }}">log in</a> or 
                 <a class="link" href="{{ signup_url }}">sign up</a> first.<br>
-                <hr>
                 You will be redirected to the Index Page in a few seconds.
             </p>
         </div>

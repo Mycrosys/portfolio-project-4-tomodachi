@@ -17,10 +17,10 @@ class EventList(generic.ListView):
 
 class EventDetail(View):
 
-    def get(self, request, slug):
+    def get(self, request, pk):
         queryset = Event.objects.order_by('location_time').filter(
             location_time__gt=timezone.now())
-        event = get_object_or_404(queryset, slug=slug)
+        event = get_object_or_404(queryset, pk=pk)
 
         return render(
             request,
@@ -31,7 +31,7 @@ class EventDetail(View):
         )
 
 
-class EventMy(generic.ListView):
+class EventMy(View):
 
     def get(self, request):
         queryset = Event.objects.order_by('location_time').filter(
@@ -83,10 +83,10 @@ class EventCreate(View):
 
 class EventDelete(View):
 
-    def get(self, request, slug):
+    def get(self, request, pk):
         queryset = Event.objects.order_by('location_time').filter(
             location_time__gt=timezone.now())
-        event = get_object_or_404(queryset, slug=slug)
+        event = get_object_or_404(queryset, pk=pk)
         if request.user == event.author:
             feedback = "Successfully deleted Event " + event.title + "."
             event.delete()
@@ -102,10 +102,10 @@ class EventDelete(View):
 
 class EventRemoveAttendee(View):
 
-    def get(self, request, slug):
+    def get(self, request, pk):
         queryset = Event.objects.order_by('location_time').filter(
             location_time__gt=timezone.now())
-        event = get_object_or_404(queryset, slug=slug)
+        event = get_object_or_404(queryset, pk=pk)
         event.attendees.remove(request.user)
         feedback = "You were successfully removed as Attendee from Event "
         feedback += event.title + "."
@@ -115,10 +115,10 @@ class EventRemoveAttendee(View):
 
 class EventAddAttendee(View):
 
-    def get(self, request, slug):
+    def get(self, request, pk):
         queryset = Event.objects.order_by('location_time').filter(
             location_time__gt=timezone.now())
-        event = get_object_or_404(queryset, slug=slug)
+        event = get_object_or_404(queryset, pk=pk)
         event.attendees.add(request.user)
         feedback = "You were successfully added as Attendee for Event "
         feedback += event.title + "."
@@ -128,10 +128,10 @@ class EventAddAttendee(View):
 
 class EventEdit(View):
 
-    def get(self, request, slug):
+    def get(self, request, pk):
         queryset = Event.objects.order_by('location_time').filter(
             location_time__gt=timezone.now())
-        event = get_object_or_404(queryset, slug=slug)
+        event = get_object_or_404(queryset, pk=pk)
 
         event_form = EventForm(instance=event)
 
@@ -143,15 +143,17 @@ class EventEdit(View):
             },
         )
 
-    def post(self, request, slug):
+    def post(self, request, pk):
         queryset = Event.objects.order_by('location_time').filter(
             location_time__gt=timezone.now())
-        event = get_object_or_404(queryset, slug=slug)
+        event = get_object_or_404(queryset, pk=pk)
 
         event_form = EventForm(data=request.POST, instance=event)
 
         if event_form.is_valid():
             event = event_form.save()
+            event.slug = "eventid_" + str(event.id)
+            event.save()
             feedback = "Successfully modified Event " + event.title + "."
             messages.add_message(request, messages.SUCCESS, feedback)
 

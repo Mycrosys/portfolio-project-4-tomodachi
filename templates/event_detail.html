@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 mt-3 offset-md-2">
-            <p class="event-headline"">Event Details</p>
+            <p class="event-headline">Event Details</p>
             <div class="event-detail-text">
                 <p class="category-detail text-center {{ event.category_verbose }}">{{ event.category_verbose }}</p>
                 <!-- Event title -->
@@ -38,14 +38,14 @@
             </div>
             <p class="text-center">
                 {% if request.user == event.author %}
-                <a href="{% url 'edit_event' event.slug %}" class="post-link">
+                <a href="{% url 'edit_event' event.id %}" class="post-link">
                     <span class="btn btn-edit">Modify Event</span>
                 </a>
                 <button type="button" class="btn btn-edit" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     Delete Event
                 </button>
                 {% elif request.user not in event.attendees.all %}
-                <a href="{% url 'join_event' event.slug %}" class="post-link">
+                <a href="{% url 'join_event' event.id %}" class="post-link">
                     <span class="btn btn-edit">Join Event</span>
                 </a>
                 {% endif %}
@@ -68,7 +68,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary btn-edit" data-bs-dismiss="modal">Cancel</button>
-                <button class="btn btn-edit" onclick="window.location.href='{% url 'delete_event' event.slug %}';">
+                <button class="btn btn-edit" onclick="deleteEvent()">
                     Delete Event
                   </button>
             </div>
@@ -76,25 +76,32 @@
     </div>
 </div>
 
+<script>
+    function deleteEvent() {
+        window.location.href = "{% url 'delete_event' event.id %}";
+    }
+</script>
+
+
 {% else %}
 <div class="container">
     <div class="row">
         <div class="col-md-8 mt-3 offset-md-2">
-            <p>
-                You need to be logged in to view details. Please 
+            <p>You need to be logged in to view details. Please 
                 <a class="link" href="{{ login_url }}">log in</a> or 
                 <a class="link" href="{{ signup_url }}">sign up</a> first.<br>
-                <hr>
                 You will be redirected to the Index Page in a few seconds.
             </p>
         </div>
     </div>
 </div>
+
 <script>
     setTimeout(function(){
        window.location.href = "{% url 'home' %}";
     }, 8000);
- </script>
+</script>
+
 {% endif %}
 
 {% endblock content %}

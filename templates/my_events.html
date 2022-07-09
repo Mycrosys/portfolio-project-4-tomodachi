@@ -21,13 +21,13 @@
                         </div>
                     
                         <p class="text-center">
-                            <a href="{% url 'event_detail' event.slug %}" class="post-link">
+                            <a href="{% url 'event_detail' event.id %}" class="post-link">
                                 <span class="btn btn-edit">View Details</span>
                             </a>
-                            <a href="{% url 'edit_event' event.slug %}" class="post-link">
+                            <a href="{% url 'edit_event' event.id %}" class="post-link">
                                 <span class="btn btn-edit">Modify Event</span>
                             </a>
-                            <button type="button" class="btn btn-edit" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            <button type="button" class="btn btn-edit" data-bs-toggle="modal" data-bs-target="#staticBackdrop_{{ event.id }}">
                                 Delete Event
                             </button>
                         </p>
@@ -35,7 +35,7 @@
                 </div>
                 
                 <!-- Delete confirmation Modal -->
-                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal fade" id="staticBackdrop_{{ event.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -48,13 +48,14 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary btn-edit" data-bs-dismiss="modal">Cancel</button>
-                                <button class="btn btn-edit" onclick="window.location.href='{% url 'delete_event' event.slug %}';">
+                                <button class="btn btn-edit" value={{event.id}} onclick="location.href='{% url 'delete_event' event.id %}'">
                                     Delete Event
-                                  </button>
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
+                
                 {% if forloop.counter|divisibleby:2 %}
             </div>
             <div class="row">
@@ -68,7 +69,7 @@
 
     <div class="row">
         <div class="col-md-10 mt-3 offset-md-1">
-            <p class="event-headline"">My Joined Events</p>
+            <p class="event-headline">My Joined Events</p>
             <p class="text-center">Only Events that haven't started yet are shown.
                 You cannot leave an Event you have created. Please delete it instead.</p>
             <!-- Joined Events Column -->
@@ -86,11 +87,11 @@
                         </div>
                     
                         <p class="text-center">
-                            <a href="{% url 'event_detail' event.slug %}" class="post-link">
+                            <a href="{% url 'event_detail' event.id %}" class="post-link">
                                 <span class="btn btn-edit">View Details</span>
                             </a>
                             {% if not request.user == event.author %}
-                            <a href="{% url 'leave_event' event.slug %}" class="post-link">
+                            <a href="{% url 'leave_event' event.id %}" class="post-link">
                                 <span class="btn btn-edit">Leave Event</span>
                             </a>
                             {% endif %}  
@@ -113,11 +114,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 mt-3 offset-md-2">
-            <p>
-                You need to be logged in to view your Events. Please 
+            <p>You need to be logged in to view your Events. Please 
                 <a class="link" href="{{ login_url }}">log in</a> or 
                 <a class="link" href="{{ signup_url }}">sign up</a> first.<br>
-                <hr>
                 You will be redirected to the Index Page in a few seconds.
             </p>
         </div>

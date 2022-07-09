@@ -1,6 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 
 {% load crispy_forms_tags %}
+{% load static %}
 
 {% if user.is_authenticated %}
 <div class="container">
@@ -11,7 +12,7 @@
             <form method="POST">
                 {{ event_form | crispy }}
                 {% csrf_token %}
-                <br>
+                <p>Events need to be created at least 12 hours before they are taking place.</p>
                 <input id="create-button" class="btn btn-signup" type="submit" value="Create Event">
                 <button id="reset-button" class="btn btn-reset" type="reset">Reset</button>
             </form>
@@ -20,17 +21,16 @@
     </div>
 </div>
 
+<script src="{% static 'js/formupdate.js' %}"></script>
+
 {% else %}
 <div class="container">
     <div class="row">
         <div class="col-md-8 mt-3 offset-md-2">
-            <p>
-                You need to be logged in to create Events. Please 
+            <p>You need to be logged in to create Events. Please 
                 <a class="link" href="{{ login_url }}">log in</a> or 
                 <a class="link" href="{{ signup_url }}">sign up</a> first.<br>
-                <hr>
-                You will be redirected to the Index Page in a few seconds.
-            </p>
+                You will be redirected to the Index Page in a few seconds.</p>
         </div>
     </div>
 </div>

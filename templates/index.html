@@ -70,7 +70,7 @@
                 <div>
                   <p class="category text-center {{ event.category_verbose }}">{{ event.category_verbose }}</p>
                 </div>
-                <a href="{% url 'event_detail' event.slug %}" class="post-link">
+                <a href="{% url 'event_detail' event.id %}" class="post-link">
                   <h2 class="card-title">{{ event.title }}</h2>
                   <p class="card-text">{{ event.location_time }}</p>
                 </a>
