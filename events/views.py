@@ -7,6 +7,11 @@ from .forms import EventForm
 
 
 class EventList(generic.ListView):
+    """
+    Displays the Index Page with the upcoming Events. The Template only
+    takes a slice of 4, but all Events in the future are returned.
+    """
+
     model = Event
     template_name = 'index.html'
 
@@ -17,8 +22,16 @@ class EventList(generic.ListView):
 
 
 class EventDetail(View):
+    """
+    Displays the Event Detail Page of a certain selected
+    Event (defined by Event ID)
+    """
 
     def get(self, request, pk):
+        """
+        Displays the Event Detail Page with the Event ID
+        """
+
         # Filter Events to only the ones that happen now and in the future
         queryset = Event.objects.order_by('location_time').filter(
             location_time__gt=timezone.now())
@@ -35,8 +48,17 @@ class EventDetail(View):
 
 
 class EventMy(View):
+    """
+    Displays the My Events Page with created and joined Events by
+    the logged in User.
+    """
 
     def get(self, request):
+        """
+        Displays the My Events Page and returns created Events by User
+        as well as joined Events.
+        """
+
         # Filter Events to only the ones that happen now and in the future
         queryset = Event.objects.order_by('location_time').filter(
             location_time__gt=timezone.now())
@@ -56,8 +78,16 @@ class EventMy(View):
 
 
 class EventCreate(View):
+    """
+    Displays the Form to create a new Event (get) and handles the creation
+    in post. Also triggers a message to inform the User once it finishes.
+    """
 
     def get(self, request):
+        """
+        Displays the Create Events Page with the form.
+        """
+
         return render(
             request,
             "create_event.html",
@@ -67,6 +97,9 @@ class EventCreate(View):
         )
 
     def post(self, request):
+        """
+        Handles the Form and creates new Database Entry
+        """
 
         # Get the Values from the Event Form
         event_form = EventForm(data=request.POST)
@@ -93,21 +126,30 @@ class EventCreate(View):
             # If the form is not valid, create and display an Error message
             feedback = "Submission invalid. Please try again."
             messages.add_message(request, messages.ERROR, feedback)
-            
+
         # redirect to My Events
         return redirect('my_events')
 
 
 class EventDelete(View):
+    """
+    Handles the deletion of an Event and redirects to the My Event Page
+    afterwards. Also Triggers a message upon completion.
+    """
 
     def get(self, request, pk):
+        """
+        Deletes the Event after checking if the logged in User is the
+        creator of the Event.
+        """
+
         # Filter Events to only the ones that happen now and in the future
         queryset = Event.objects.order_by('location_time').filter(
             location_time__gt=timezone.now())
-        
+
         # Use the Event ID to get the correct Event
         event = get_object_or_404(queryset, pk=pk)
-        
+
         # Event Deletion only allowed for event creator so check that
         if request.user == event.author:
             # Create a feedback message that the Event was deleted
@@ -127,8 +169,16 @@ class EventDelete(View):
 
 
 class EventRemoveAttendee(View):
+    """
+    Handles the removal of the logged in User from an Event and redirects
+    to the My Event Page afterwards. Also triggers a message upon completion.
+    """
 
     def get(self, request, pk):
+        """
+        Removes the participation of the logged in User in an Event
+        """
+
         # Filter Events to only the ones that happen now and in the future
         queryset = Event.objects.order_by('location_time').filter(
             location_time__gt=timezone.now())
@@ -149,8 +199,16 @@ class EventRemoveAttendee(View):
 
 
 class EventAddAttendee(View):
+    """
+    Handles the adding of the logged in User as Event attendee and redirects
+    to the My Event Page afterwards. Also triggers a message upon completion.
+    """
 
     def get(self, request, pk):
+        """
+        Adds the participation of the logged in User in an Event
+        """
+
         # Filter Events to only the ones that happen now and in the future
         queryset = Event.objects.order_by('location_time').filter(
             location_time__gt=timezone.now())
@@ -171,12 +229,22 @@ class EventAddAttendee(View):
 
 
 class EventEdit(View):
+    """
+    Displays the Form with an existing Event prefilled (get) and handles
+    the update/editing in post. Also triggers a message to inform the User
+    once it finishes.
+    """
 
     def get(self, request, pk):
+        """
+        Displays the Modify Event Page with the form prefilled with Data
+        from the Event with the used Event ID
+        """
+
         # Filter Events to only the ones that happen now and in the future
         queryset = Event.objects.order_by('location_time').filter(
             location_time__gt=timezone.now())
-        
+
         # Use the Event ID to get the correct Event
         event = get_object_or_404(queryset, pk=pk)
 
@@ -192,10 +260,14 @@ class EventEdit(View):
         )
 
     def post(self, request, pk):
+        """
+        Handles the Form and updated the Database Entry
+        """
+
         # Filter Events to only the ones that happen now and in the future
         queryset = Event.objects.order_by('location_time').filter(
             location_time__gt=timezone.now())
-        
+
         # Use the Event ID to get the correct Event
         event = get_object_or_404(queryset, pk=pk)
 

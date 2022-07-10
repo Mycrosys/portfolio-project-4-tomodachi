@@ -11,4 +11,3 @@ class EventAdmin(SummernoteModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     list_filter = ('created_on', 'location_time')
     summernote_fields = ('summary')
-
