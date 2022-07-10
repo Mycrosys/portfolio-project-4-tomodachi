@@ -186,13 +186,21 @@ class EventRemoveAttendee(View):
         # Use the Event ID to get the correct Event
         event = get_object_or_404(queryset, pk=pk)
 
-        # Remove the current logged in User from the list of attendees
-        event.attendees.remove(request.user)
+        # Check if logged in User is in attendees
+        if request.user in event.attendees.all():
+            # Remove the current logged in User from the list of attendees
+            event.attendees.remove(request.user)
 
-        # Create a feedback message that User was removed from attendees
-        feedback = "You were successfully removed as Attendee from Event "
-        feedback += event.title + "."
-        messages.add_message(request, messages.SUCCESS, feedback)
+            # Create a feedback message that User was removed from attendees
+            feedback = "You were successfully removed as Attendee from Event "
+            feedback += event.title + "."
+            messages.add_message(request, messages.SUCCESS, feedback)
+
+        else:
+            # Create a feedback message that User isn't in attendees
+            feedback = "You haven't joined Event "
+            feedback += event.title + " yet and therefore cannot be removed"
+            messages.add_message(request, messages.ERROR, feedback)
 
         # redirect to My Events
         return redirect('my_events')
@@ -216,13 +224,20 @@ class EventAddAttendee(View):
         # Use the Event ID to get the correct Event
         event = get_object_or_404(queryset, pk=pk)
 
-        # Add the current logged in User to the list of attendees
-        event.attendees.add(request.user)
+        if request.user in event.attendees.all():
+            # Create a feedback message that User is already an attendee
+            feedback = "You are already an Attendee for Event "
+            feedback += event.title + "."
+            messages.add_message(request, messages.ERROR, feedback)    
+        
+        else:
+            # Add the current logged in User to the list of attendees
+            event.attendees.add(request.user)
 
-        # Create a feedback message that User was added to attendees
-        feedback = "You were successfully added as Attendee for Event "
-        feedback += event.title + "."
-        messages.add_message(request, messages.SUCCESS, feedback)
+            # Create a feedback message that User was added to attendees
+            feedback = "You were successfully added as Attendee for Event "
+            feedback += event.title + "."
+            messages.add_message(request, messages.SUCCESS, feedback)
 
         # redirect to My Events
         return redirect('my_events')

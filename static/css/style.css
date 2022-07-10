@@ -33,14 +33,6 @@ body {
     color: #e81010 !important;
 }
 
-.form-check-label, .form-check-input {
-    padding: 0;
-    margin-top: 5px;
-    font-size: 1.7rem;
-    font-weight: 900;
-    margin-left: 10px;
-}
-
 .container-fluid, .container {
     padding: 0;
 }
