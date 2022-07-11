@@ -10,22 +10,22 @@
 <div class="container">
   <div class="row">
     <div class="col-md-8 mt-3 offset-md-2">
-      <h3>{% trans "Sign In" %}</h3>
-      <p>{% blocktrans %}Welcome to Tomodachi! If you have not created an account yet, and want
+      <p class="event-headline">{% trans "Sign In" %}</p>
+      <p class="text-main text-center">{% blocktrans %}Welcome to Tomodachi! If you have not created an account yet, and want
         to start creating, sharing and attending Events, please
       <a class="link" href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
     </div>
   </div>
 
   <div class="row">
-    <div class="cold-md-8 mt-3 offset-md-2">
+    <div class="cold-md-12 mt-3 text-center text-main">
       <form class="login" method="POST" action="{% url 'account_login' %}">
         {% csrf_token %}
         {{ form.as_p }}
         {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
         {% endif %}
-        <button class="btn btn-signup right" type="submit">{% trans "Sign In" %}</button>
+        <button class="btn btn-signup" type="submit">{% trans "Sign In" %}</button>
       </form>
     </div>
   </div>

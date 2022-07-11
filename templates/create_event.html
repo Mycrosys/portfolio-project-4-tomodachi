@@ -9,16 +9,18 @@
     <div class="row">
         <div class="col-md-8 mt-1 offset-md-2">
             <p class="event-headline"">Create Event</p>
-
-            <!-- Load Eventform from forms.py with crispyforms -->
-            <form method="POST">
-                {{ event_form | crispy }}
-                {% csrf_token %}
-                <p>Events need to be created at least 12 hours before they are taking place.</p>
-                <input id="create-button" class="btn btn-signup" type="submit" value="Create Event">
-                <button id="reset-button" class="btn btn-reset" type="reset">Reset</button>
-            </form>
-            <br>
+            <div class="text-main">
+                <!-- Load Eventform from forms.py with crispyforms -->
+                <form method="POST">
+                    {{ event_form | crispy }}
+                    {% csrf_token %}
+                    <p>Events need to be created at least 12 hours before they are taking place.</p>
+                    <div class="text-center">
+                        <input id="create-button" class="btn btn-signup" type="submit" value="Create Event">
+                        <button id="reset-button" class="btn btn-reset" type="reset">Reset</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -31,7 +33,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 mt-3 offset-md-2">
-            <p>You need to be logged in to create Events. Please 
+            <p class="text-main">You need to be logged in to create Events. Please 
                 <a class="link" href="{{ login_url }}">log in</a> or 
                 <a class="link" href="{{ signup_url }}">sign up</a> first.<br>
                 You will be redirected to the Index Page in a few seconds.</p>

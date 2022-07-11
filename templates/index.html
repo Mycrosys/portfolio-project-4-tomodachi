@@ -41,23 +41,23 @@
       <p class="index-headline">Tomodachi lets you create and share Events and meet up with new people.</p>
       
       <div class="col-md-4 aboutsite">
-        <p class="aboutsite-headline">Create personal Events within seconds</p>
-        <p>With just a few clicks you will be able to create your events and meetups. It takes no prior knowledge as long as you have all the information ready. Be it watching a movie, halo with the boys, or a girl's night out - Tomodachi can handle everything for you.</p>
+        <p class="aboutsite-headline"><i class="fa-solid fa-calendar-plus"></i> Create personal Events within seconds</p>
+        <p class="text-main">With just a few clicks you will be able to create your events and meetups. It takes no prior knowledge as long as you have all the information ready. Be it watching a movie, halo with the boys, or a girl's night out - Tomodachi can handle everything for you.</p>
       </div>
       
       <div class="col-md-4 aboutsite">
-        <p class="aboutsite-headline">Share your Events with new friends</p>
-        <p>Once you have created your event, you can share it via a simple link with all your friends. Registered Users will be able to see all the details like the location of the meetup and join it, signaling their attendance.</p>
+        <p class="aboutsite-headline"><i class="fa-solid fa-link"></i> Share your Events with new friends</p>
+        <p class="text-main">Once you have created your event, you can share it via a simple link with all your friends. Registered Users will be able to see all the details like the location of the meetup and join it, signaling their attendance.</p>
       </div>
       
       <div class="col-md-4 aboutsite">
-        <p class="aboutsite-headline">Meet up and have fun together</p>
-        <p>Ever wanted to start a Bookclub but none of your friends were interested? It's easy to find new friends with Tomodachi and explore your hobbies together. Sign up today for free so you can get started!</p>
+        <p class="aboutsite-headline"><i class="fa-solid fa-user-group"></i> Meet up and have fun together</p>
+        <p class="text-main">Ever wanted to start a Bookclub but none of your friends were interested? It's easy to find new friends with Tomodachi and explore your hobbies together. Sign up today for free so you can get started!</p>
       </div>
     </div>
 
-    <div class="row upcoming">
-      <p class="index-headline">Upcoming Events</p>
+    <div class="row">
+      <p class="upcoming-headline">Upcoming Events</p>
       
       <!-- Show the next 4 upcoming Events -->
       
@@ -67,15 +67,15 @@
           <div class="col-md-6 col-lg-3">
             <div class="card mb-3">
               <div class="card-body">
-                <div>
-                  <p class="category text-center {{ event.category_verbose }}">{{ event.category_verbose }}</p>
-                </div>
-                <a href="{% url 'event_detail' event.id %}" class="post-link">
-                  <h2 class="card-title">{{ event.title }}</h2>
-                  <p class="card-text">{{ event.location_time }}</p>
-                </a>
-                <hr />
-                <p class="card-text text-muted h6">Joined: {{ event.number_of_attendees }}</p>
+                <!-- Display Category with color coded background -->
+                <p class="category text-center {{ event.category_verbose }}">{{ event.category_verbose }}</p>
+                            
+                <!-- Display basic quick event infos for overview -->
+                <h2 class="card-title">{{ event.title }}</h2>
+                <p class="card-text">{{ event.location_time}}
+                    <br>
+                    Attendees: {{ event.number_of_attendees }}
+                </p>
               </div>
             </div>
           </div>

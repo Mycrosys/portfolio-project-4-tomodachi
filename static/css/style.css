@@ -1,6 +1,6 @@
 body {
-    background-color: #f5f5f5;
-    color: #414244;
+    background-color: #f1faee;
+    color: #1d3557;
     font-family: 'Aleo', serif;
     font-size: 1.2rem;
 }
@@ -9,12 +9,14 @@ body {
     font-family: 'Arimo', sans-serif;
     font-size: 1.5rem;
     font-weight: 600;
-    color: #414244;
+    color: #1d3557;
     margin-left: 10px;
 }
 
+/* Navbar */
+
 .navbar {
-    background-color: #D0DADC;
+    background-color: #a8dadc;
     margin: 0px;
     padding: 5px;
     font-size: 1.4rem;
@@ -22,16 +24,27 @@ body {
 }
 
 .nav-item {
-    margin: 0px 10px;
+    margin: 0px 5px;
+}
+
+.nav-link {
+    color: #1d3557 !important;
 }
 
 .nav-link.active {
-    color: #e81010 !important;
+    color: #e63946 !important;
 }
 
 .nav-link:hover {
-    color: #e81010 !important;
+    color: #e63946 !important;
 }
+
+.user-display {
+    display: block;
+    padding: 0.5rem 1rem;
+}
+
+/* Removing Padding and Margin from Bootstrap classes */
 
 .container-fluid, .container {
     padding: 0;
@@ -45,33 +58,22 @@ body {
     padding: 0;
 }
 
+/* Headlines */
+
 .index-headline {
     text-align: center;
     font-family: 'Arimo', sans-serif;
-    font-size: 1.7rem;
-    margin-top: 10px;
+    font-size: 2.2rem;
+    margin-top: 35px;
+    margin-bottom: 15px;
 }
 
 .event-headline {
     text-align: center;
     font-family: 'Arimo', sans-serif;
     font-size: 1.7rem;
-    margin-top: 30px;
+    margin-top: 20px;
     text-decoration: underline;
-}
-
-.aboutsite {
-    margin-bottom: 30px;
-    padding: 20px 40px 0px;
-    font-weight: bold;
-    font-style: italic;
-}
-
-.event-detail-text {
-    font-size: 1.2rem;
-    margin-bottom: 15px;
-    padding: 10px 20px 0px;
-    font-weight: 500;
 }
 
 .aboutsite-headline {
@@ -80,26 +82,68 @@ body {
     font-size: 1.2rem;
 }
 
-.upcoming {
-    background-color: #ddedf3;
+.upcoming-headline {
+    text-align: center;
+    font-family: 'Arimo', sans-serif;
+    font-size: 2.2rem;
+    margin-top: 10px;
+    margin-bottom: 15px;
 }
 
+.event-detail-title {
+    font-size: 1.7rem;
+    margin-bottom: 15px;
+    font-weight: 900;
+}
+
+/* Index Page section About */
+
+.aboutsite {
+    margin-bottom: 10px;
+    padding: 20px 40px 0px;
+}
+
+/* Main Font Transform */
+
+.text-main {
+    font-weight: bold;
+    font-style: italic;
+}
+
+/* Cards */
+
 .card {
-    border: 1px solid #414244;
+    border: 1px solid #1d3557;
     margin: 10px;
     background-color: transparent;
 }
 
+.card-title,
+.card-text {
+    font-weight: bold;
+    font-family: 'Aleo', serif;
+    font-size: 1.7rem;
+    margin-top: 10px;
+}
+
+.card-text {
+    font-style: italic;
+    font-size: 1.2rem;
+}
+
+/* Classes for Categories */
+
 .category {
-    color: white;
+    color: #f1faee;
     margin: 4px 0;
     text-transform: uppercase;
     font-size: 1rem;
     font-weight: 800;
+    letter-spacing: 2px;
 }
 
 .category-detail {
-    color: white;
+    color: #f1faee;
     margin: 12px 0;
     text-transform: uppercase;
     font-size: 1.5rem;
@@ -126,32 +170,36 @@ body {
     background-color: #850073;
 }
 
+/* Links */
+
 .post-link {
+    color: #e63946;
     text-decoration: none;
-    color: #414244;
 }
 
 .post-link:hover,
 .page-link {
-    color: #e81010;
+    color: #e63946;
 }
 
 .link {
-    color: #e81010;
+    color: #e63946;
     text-decoration: none;
     font-weight: bold;
 }
 
 .link:hover,
 .link:active {
-    color: #414244;
+    color: #e63946;
     text-decoration: underline;
 }
 
+/* Buttons */
+
 .btn-signup, .btn-edit {
-    background-color: #e81010;
+    background-color: #457B9D;
     color: #fff;
-    border: 1px solid #000;
+    border: 1px solid #1d3557;
     font-weight: bold;
 }
 
@@ -160,9 +208,9 @@ body {
 }
 
 .btn-reset {
-    background-color: #4d42ee;
+    background-color: #1d3557;
     color: #fff;
-    border: 1px solid #000;
+    border: 1px solid #1d3557;
     font-weight: bold;
 }
 
@@ -171,14 +219,16 @@ body {
 .btn-signup:active,
 .btn-edit:active {
     background-color: #fff;
-    color: #e81010;
+    color: #457B9D;
 }
 
 .btn-reset:hover,
 .btn-reset:active {
     background-color: #fff;
-    color: #4d42ee;
+    color: #1d3557;
 }
+
+/* Messages */
 
 .notification {
     z-index: 10;
@@ -186,8 +236,10 @@ body {
     margin-top: 80px;
 }
 
+/* Footer */
+
 .footer {
     font-size: 1.5rem;
-    background-color: #D0DADC;
-    color: #414244;
+    background-color: #1d3557;
+    color: #f1faee;
 }

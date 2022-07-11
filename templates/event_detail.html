@@ -6,10 +6,10 @@
     <div class="row">
         <div class="col-md-8 mt-3 offset-md-2">
             <p class="event-headline">Event Details</p>
-            <div class="event-detail-text">
+            <div class="text-main">
                 <p class="category-detail text-center {{ event.category_verbose }}">{{ event.category_verbose }}</p>
                 <!-- Event title -->
-                <h1>{{ event.title }}</h1>
+                <p class="event-detail-title text-center">{{ event.title }}</p>
                 <!-- Event author goes before the | the event's creation date goes after -->
                 <p>created by {{ event.author }} on {{ event.created_on }}</p>
                 <p>Last modified on: {{ event.modified_on }}</p>
@@ -17,26 +17,18 @@
                 <hr>
                 <p>{{ event.summary | safe }}</p>
                 <hr>
-                <div class="row">
-                    <div class="col-md-12">
-                        <!-- Location and time of the Event is displayed here -->
+                <!-- Location and time of the Event is displayed here -->
+                {% if event.location_online %}
+                <p>Online Event: Yes</p>
+                {% else %}
+                <p>Online Event: No</p>
+                {% endif %}
+                     
+                <p>Location: {{ event.location_area }}</p>
+                <p>Event starts at: {{ event.location_time }}</p>
                         
-                        {% if event.location_online %}
-                        <p>Online Event: Yes</p>
-                        {% else %}
-                        <p>Online Event: No</p>
-                        {% endif %}
-                        
-                        <p>Location: {{ event.location_area }}</p>
-                        <p>Event starts at: {{ event.location_time }}</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <!-- The number of Attendees is displayed here -->
-                        <strong class="text-secondary">Current number of Attendees: {{ event.number_of_attendees }} </strong>
-                    </div>
-                </div>
+                <!-- The number of Attendees is displayed here -->
+                <p>Current number of Attendees: {{ event.number_of_attendees }}</p>
             </div>
             <p class="text-center">
                 <!-- If the author is viewing the Event, offer Modify and Delete Button -->
@@ -67,7 +59,7 @@
                 <h5 class="modal-title" id="staticBackdropLabel"><strong>Delete confirmation</strong></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body text-main">
                 Do you really want to delete the Event "{{ event.title }}"?
                 This action can not be reversed.
             </div>
@@ -85,7 +77,7 @@
 {% else %}
 <div class="container">
     <div class="row">
-        <div class="col-md-8 mt-3 offset-md-2">
+        <div class="col-md-8 mt-3 offset-md-2 text-main">
             <p>You need to be logged in to view details. Please 
                 <a class="link" href="{{ login_url }}">log in</a> or 
                 <a class="link" href="{{ signup_url }}">sign up</a> first.<br>
