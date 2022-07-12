@@ -1,5 +1,4 @@
 {% extends 'base.html' %} {% block content %}
-
 {% load crispy_forms_tags %}
 
 <!-- User needs to be Authenticated to Modify Events -->
@@ -40,7 +39,6 @@
     setTimeout(function(){
        window.location.href = "{% url 'home' %}";
     }, 8000);
- </script>
+</script>
 {% endif %}
-
 {% endblock content %}

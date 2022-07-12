@@ -1,5 +1,4 @@
 {% extends 'base.html' %} {% block content %}
-
 {% load crispy_forms_tags %}
 {% load static %}
 
@@ -44,7 +43,6 @@
     setTimeout(function(){
        window.location.href = "{% url 'home' %}";
     }, 8000);
- </script>
+</script>
 {% endif %}
-
 {% endblock content %}

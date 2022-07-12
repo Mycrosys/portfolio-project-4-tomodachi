@@ -17,6 +17,7 @@
                 <hr>
                 <p>{{ event.summary | safe }}</p>
                 <hr>
+                
                 <!-- Location and time of the Event is displayed here -->
                 {% if event.location_online %}
                 <p>Online Event: Yes</p>
@@ -30,6 +31,9 @@
                 <!-- The number of Attendees is displayed here -->
                 <p>Current number of Attendees: {{ event.number_of_attendees }}</p>
             </div>
+            
+            
+            <!-- Buttons -->
             <p class="text-center">
                 <!-- If the author is viewing the Event, offer Modify and Delete Button -->
                 {% if request.user == event.author %}
@@ -96,7 +100,5 @@
        window.location.href = "{% url 'home' %}";
     }, 8000);
 </script>
-
 {% endif %}
-
 {% endblock content %}
