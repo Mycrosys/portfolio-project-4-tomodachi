@@ -112,10 +112,6 @@ class EventCreate(View):
             # The Event ID is only created with saving,
             # so this is a necessary step
             event = event_form.save()
-            # Create the slug out of the Event ID and a string
-            event.slug = "eventid_" + str(event.id)
-            # Save it again
-            event.save()
             # Add the current User as Attendee (required)
             event.attendees.add(request.user)
             # Create a feedback message that the Event was created
@@ -293,12 +289,6 @@ class EventEdit(View):
         if event_form.is_valid():
             # Save the form to create an Event ID automatically
             event = event_form.save()
-            # This step isn't actually needed, but it is done to fix
-            # Slugs created by Events in the Admin Panel
-            # All Events created via the Form on the Website already
-            # have the correct slug
-            event.slug = "eventid_" + str(event.id)
-            event.save()
             # Create a feedback message that the Event was updated
             feedback = "Successfully modified Event " + event.title + "."
             messages.add_message(request, messages.SUCCESS, feedback)
