@@ -1,7 +1,6 @@
 from django import forms
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Column, Row, Fieldset, Submit, Reset
-from crispy_forms.layout import Div
+from crispy_forms.layout import Layout, Column, Row, Fieldset, Submit, Div
 from .models import Event
 
 
@@ -49,12 +48,6 @@ class BrowseForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
-        # self.helper.add_input(Submit('submit', 'Filter',
-        #                      css_class='btn btn-crispy'))
-
-        # self.helper.add_input(Reset('reset', 'Reset',
-        #                      css_class='btn btn-crispy'))
-
         self.helper.form_method = 'POST'
         self.helper.layout = Layout(
             'searchstring',
@@ -78,6 +71,5 @@ class BrowseForm(forms.Form):
             ),
 
             Div(Submit('submit', 'Filter', css_class='btn btn-crispy'),
-                Reset('reset', 'Reset', css_class='btn btn-crispy'),
                 css_class='text-center',)
         )

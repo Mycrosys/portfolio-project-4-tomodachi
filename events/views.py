@@ -4,7 +4,7 @@ from django.utils import timezone
 from django.contrib import messages
 from .models import Event
 from .forms import EventForm, BrowseForm
-
+from django.db.models import Q
 
 class EventList(generic.ListView):
     """
@@ -330,4 +330,63 @@ class EventBrowse(View):
         """
         Handles the Form and Filters the Events
         """
-        return redirect('my_events')
+        # Filter Events to only the ones that happen now and in the future
+        # This is our baseline to work from
+        base_list = Event.objects.order_by('location_time').filter(
+            location_time__gt=timezone.now())
+
+        browse_form = BrowseForm(request.POST)
+
+        if browse_form.is_valid():
+
+            event_list = base_list
+
+            # online/offline
+            if not browse_form.cleaned_data['online']:
+                event_list = event_list.exclude(location_online=True)
+
+            if not browse_form.cleaned_data['offline']:
+                event_list = event_list.exclude(location_online=False)
+
+            # Categories being handled
+            if not browse_form.cleaned_data['dining']:
+                event_list = event_list.exclude(category='DIN')
+
+            if not browse_form.cleaned_data['cinema']:
+                event_list = event_list.exclude(category='CIN')
+
+            if not browse_form.cleaned_data['gaming']:
+                event_list = event_list.exclude(category='GAM')
+
+            if not browse_form.cleaned_data['sports']:
+                event_list = event_list.exclude(category='SPO')
+
+            if not browse_form.cleaned_data['camping']:
+                event_list = event_list.exclude(category='CAM')
+
+            # Searchstring
+            # Check if it contains anything then execute the code
+            if not browse_form.cleaned_data['searchstring'] =="":
+                searchstring = browse_form.cleaned_data['searchstring']
+
+                # Find the searchstring either in the title,
+                # summary or location area
+                event_list = event_list.filter(
+                                Q(title__icontains=searchstring) |
+                                Q(summary__icontains=searchstring) |
+                                Q(location_area__icontains=searchstring))
+
+            return render(
+                request,
+                "browse_event.html",
+                {
+                    "event_list": event_list,
+                    "browse_form": browse_form
+                },
+            )
+
+        else:
+            # If the form is not valid, create and display an Error message
+            feedback = "Submission invalid. Please try again."
+            messages.add_message(request, messages.ERROR, feedback)
+            return redirect('browse_event')
