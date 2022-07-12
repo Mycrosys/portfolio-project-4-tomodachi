@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 
@@ -15,13 +16,14 @@
       
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="https://res.cloudinary.com/mkiesel-cloudinary/image/upload/v1656334191/portfolio4/cinema-slider_haviab.jpg" class="d-block w-100" alt="A group of people enjoying a Movie in a Cinema.">
+            <img src="{% static 'img/cinema-slider.jpg' %}" class="d-block w-100" alt="A group of people enjoying a Movie in a Cinema.">
+          </div>
+          
+          <div class="carousel-item">
+            <img src="{% static 'img/gaming-slider.jpg' %}" class="d-block w-100" alt="Two Girls on a couch playing videogames.">
           </div>
           <div class="carousel-item">
-            <img src="https://res.cloudinary.com/mkiesel-cloudinary/image/upload/v1656334190/portfolio4/gaming-slider_ua7ihq.jpg" class="d-block w-100" alt="Two Girls on a couch playing videogames.">
-          </div>
-          <div class="carousel-item">
-            <img src="https://res.cloudinary.com/mkiesel-cloudinary/image/upload/v1656334189/portfolio4/camping-slider_zzm91p.jpg" class="d-block w-100" alt="Two Girls outside camping in front of a campfire.">
+            <img src="{% static 'img/camping-slider.jpg' %}" class="d-block w-100" alt="Two Girls outside camping in front of a campfire.">
           </div>
         </div>
       
