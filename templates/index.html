@@ -70,7 +70,18 @@
             <div class="card mb-3">
               <div class="card-body">
                 <!-- Display Category with color coded background -->
-                <p class="category text-center {{ event.category_verbose }}">{{ event.category_verbose }}</p>
+                <p class="category text-center {{ event.category_verbose }}">
+                  {{ event.category_verbose }}
+                  <!-- Show Calendar sign if you created the Event, same as in Navbar -->
+                  {% if event.author == request.user %}
+                  <i class="fa-solid fa-calendar-days"></i>
+                  {% endif %}
+
+                  <!-- Show Checkmark sign if you joined the Event -->
+                  {% if request.user in event.attendees.all %}
+                  <i class="fa-solid fa-check"></i>
+                  {% endif %}
+                </p>
                             
                 <!-- Display basic quick event infos for overview -->
                 <p class="card-title">{{ event.title }}</p>
