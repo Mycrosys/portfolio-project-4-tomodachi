@@ -7,14 +7,14 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 mt-1 offset-md-2">
-            <p class="event-headline"">Create Event</p>
+            <p class="event-headline"">Modify Event</p>
             <div class="text-main">
                 <!-- Load Eventform from forms.py with crispyforms -->
                 <form method="POST">
                     {{ event_form | crispy }}
                     {% csrf_token %}
                     <div class="text-center">
-                        <input id="create-button" class="btn btn-signup" type="submit" value="Create Event">
+                        <input id="create-button" class="btn btn-edit" type="submit" value="Create Event">
                         <button id="reset-button" class="btn btn-reset" type="reset">Reset</button>
                     </div>
                 </form>

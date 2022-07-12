@@ -52,7 +52,7 @@
       
       <div class="col-md-4 aboutsite">
         <p class="aboutsite-headline"><i class="fa-solid fa-user-group"></i> Meet up and have fun together</p>
-        <p class="text-main">Ever wanted to start a Bookclub but none of your friends were interested? It's easy to find new friends with Tomodachi and explore your hobbies together. Sign up today for free so you can get started!</p>
+        <p class="text-main">Ever wanted to watch a Movie but none of your friends had time? Don't want to go alone? It's easy to find new friends with Tomodachi and explore your hobbies together. Sign up today for free so you can get started!</p>
       </div>
     </div>
 
@@ -71,7 +71,7 @@
                 <p class="category text-center {{ event.category_verbose }}">{{ event.category_verbose }}</p>
                             
                 <!-- Display basic quick event infos for overview -->
-                <h2 class="card-title">{{ event.title }}</h2>
+                <p class="card-title">{{ event.title }}</p>
                 <p class="card-text">{{ event.location_time}}
                     <br>
                     Attendees: {{ event.number_of_attendees }}
@@ -82,9 +82,17 @@
           {% endfor %}
         </div>
       </div>
-    
     </div>
-
+    {% if not user.is_authenticated %}
+    <div class="row">
+      <div class="col-12 mt-3 text-center">
+      <!-- Signup Button on the Bottom -->
+        <a href="{% url 'account_signup' %}" class="post-link">
+          <span class="btn btn-edit btn-big">Sign up and start creating your own Events today!</span>
+        </a>
+      </div>
+    </div>
+    {% endif %}
 </div>
   
 <script>

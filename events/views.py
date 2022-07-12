@@ -3,7 +3,7 @@ from django.views import generic, View
 from django.utils import timezone
 from django.contrib import messages
 from .models import Event
-from .forms import EventForm
+from .forms import EventForm, BrowseForm
 
 
 class EventList(generic.ListView):
@@ -228,8 +228,8 @@ class EventAddAttendee(View):
             # Create a feedback message that User is already an attendee
             feedback = "You are already an Attendee for Event "
             feedback += event.title + "."
-            messages.add_message(request, messages.ERROR, feedback)    
-        
+            messages.add_message(request, messages.ERROR, feedback)
+
         else:
             # Add the current logged in User to the list of attendees
             event.attendees.add(request.user)
@@ -309,4 +309,35 @@ class EventEdit(View):
             messages.add_message(request, messages.ERROR, feedback)
 
         # redirect to My Events
+        return redirect('my_events')
+
+
+class EventBrowse(View):
+    """
+    Displays the Form to filter Events (get) and handles form inputs
+    in post. Shows all Events for first time you open Page.
+    """
+
+    def get(self, request):
+        """
+        Displays the Browse Events Page with the form.
+        """
+
+        # Filter Events to only the ones that happen now and in the future
+        event_list = Event.objects.order_by('location_time').filter(
+            location_time__gt=timezone.now())
+
+        return render(
+            request,
+            "browse_event.html",
+            {
+                "event_list": event_list,
+                "browse_form": BrowseForm
+            },
+        )
+
+    def post(self, request):
+        """
+        Handles the Form and Filters the Events
+        """
         return redirect('my_events')

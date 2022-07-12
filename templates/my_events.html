@@ -17,7 +17,7 @@
                             <p class="category text-center {{ event.category_verbose }}">{{ event.category_verbose }}</p>
                             
                             <!-- Display basic quick event infos for overview -->
-                            <h2 class="card-title">{{ event.title }}</h2>
+                            <p class="card-title">{{ event.title }}</p>
                             <p class="card-text">{{ event.location_time}}
                                 <br>
                                 Attendees: {{ event.number_of_attendees }}
@@ -26,13 +26,13 @@
                         
                         <!-- Display buttons for opening detail view, modify event or event deletion -->
                         <p class="text-center">
-                            <a href="{% url 'event_detail' event.id %}" class="post-link">
-                                <span class="btn btn-edit">View Details</span>
+                            <a href="{% url 'event_detail' event.id %}" class="post-link" target="_blank">
+                                <span class="btn btn-signup">View Details</span>
                             </a>
                             <a href="{% url 'edit_event' event.id %}" class="post-link">
-                                <span class="btn btn-edit">Modify Event</span>
+                                <span class="btn btn-signup">Modify Event</span>
                             </a>
-                            <button type="button" class="btn btn-edit" data-bs-toggle="modal" data-bs-target="#staticBackdrop_{{ event.id }}">
+                            <button type="button" class="btn btn-signup" data-bs-toggle="modal" data-bs-target="#staticBackdrop_{{ event.id }}">
                                 Delete Event
                             </button>
                         </p>
@@ -52,8 +52,8 @@
                                 This action can not be reversed.
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary btn-edit" data-bs-dismiss="modal">Cancel</button>
-                                <button class="btn btn-edit" onclick="location.href='{% url 'delete_event' event.id %}'">
+                                <button type="button" class="btn btn-signup" data-bs-dismiss="modal">Cancel</button>
+                                <button class="btn btn-signup" onclick="location.href='{% url 'delete_event' event.id %}'">
                                     Delete Event
                                 </button>
                             </div>
@@ -100,13 +100,13 @@
                         <!-- Display buttons for opening detail view -->
                         <p class="text-center">
                             <a href="{% url 'event_detail' event.id %}" class="post-link">
-                                <span class="btn btn-edit">View Details</span>
+                                <span class="btn btn-signup">View Details</span>
                             </a>
                             
                             <!-- Display buttons for leaving an event if you are not the author of it -->
                             {% if not request.user == event.author %}
                             <a href="{% url 'leave_event' event.id %}" class="post-link">
-                                <span class="btn btn-edit">Leave Event</span>
+                                <span class="btn btn-signup">Leave Event</span>
                             </a>
                             {% endif %}  
                         </p>

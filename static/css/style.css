@@ -5,14 +5,6 @@ body {
     font-size: 1.2rem;
 }
 
-.brand {
-    font-family: 'Arimo', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #1d3557;
-    margin-left: 10px;
-}
-
 /* Navbar */
 
 .navbar {
@@ -60,6 +52,14 @@ body {
 
 /* Headlines */
 
+.brand {
+    font-family: 'Arimo', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1d3557;
+    margin-left: 10px;
+}
+
 .index-headline {
     text-align: center;
     font-family: 'Arimo', sans-serif;
@@ -91,6 +91,7 @@ body {
 }
 
 .event-detail-title {
+    font-family: 'Arimo', sans-serif;
     font-size: 1.7rem;
     margin-bottom: 15px;
     font-weight: 900;
@@ -103,18 +104,21 @@ body {
     padding: 20px 40px 0px;
 }
 
-/* Main Font Transform */
+/* Main Font */
 
 .text-main {
     font-weight: bold;
     font-style: italic;
+    color: #1d3557;
+    font-family: 'Aleo', serif;
+    font-size: 1.2rem;
 }
 
 /* Cards */
 
 .card {
     border: 1px solid #1d3557;
-    margin: 10px;
+    margin: 0px;
     background-color: transparent;
 }
 
@@ -170,6 +174,18 @@ body {
     background-color: #850073;
 }
 
+/* Forms */
+
+.category-form {
+    margin-left: 25px;
+}
+
+fieldset {
+    border: 2px solid #1d3557;
+    padding: 10px;
+    border-radius: 15px;
+}
+
 /* Links */
 
 .post-link {
@@ -196,7 +212,9 @@ body {
 
 /* Buttons */
 
-.btn-signup, .btn-edit {
+.btn-signup,
+.btn-edit,
+.btn-crispy {
     background-color: #457B9D;
     color: #fff;
     border: 1px solid #1d3557;
@@ -204,7 +222,11 @@ body {
 }
 
 .btn-edit {
-    margin-bottom: 5px;
+    margin-bottom: 20px;
+}
+
+.btn-crispy {
+    margin: 20px auto;
 }
 
 .btn-reset {
@@ -212,12 +234,20 @@ body {
     color: #fff;
     border: 1px solid #1d3557;
     font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.btn-big {
+    font-size: 2rem;
+    margin-bottom: 40px;
 }
 
 .btn-signup:hover,
 .btn-edit:hover,
+.btn-crispy:hover,
 .btn-signup:active,
-.btn-edit:active {
+.btn-edit:active,
+.btn-crispy:active {
     background-color: #fff;
     color: #457B9D;
 }

@@ -2,6 +2,7 @@
 {% url 'home' as home_url %}
 {% url 'create_event' as create_url %}
 {% url 'my_events' as myevents_url %}
+{% url 'browse_event' as browse_url %}
 {% url 'account_signup' as signup_url %}
 {% url 'account_login' as login_url %}
 {% url 'account_logout' as logout_url %}
@@ -37,7 +38,7 @@
                 
                 <!-- Browse Events -->
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fa-solid fa-magnifying-glass"></i> Browse</a>
+                    <a class="nav-link {% if request.path == browse_url %} active {%endif%}" href="{% url 'browse_event' %}"><i class="fa-solid fa-magnifying-glass"></i> Browse</a>
                 </li>
             </ul>    
 
