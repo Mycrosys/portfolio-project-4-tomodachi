@@ -1,5 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 <!-- User needs to be Authenticated to Modify Events -->
 {% if user.is_authenticated %}
@@ -12,8 +13,9 @@
                 <form method="POST">
                     {{ event_form | crispy }}
                     {% csrf_token %}
+                    <p>If you make any modifications, the Event start time needs to be at least 12 hours in the future.</p>
                     <div class="text-center">
-                        <input id="create-button" class="btn btn-edit" type="submit" value="Create Event">
+                        <input id="create-button" class="btn btn-edit" type="submit" value="Update Event">
                         <button id="reset-button" class="btn btn-reset" type="reset">Reset</button>
                     </div>
                 </form>
@@ -21,6 +23,9 @@
         </div>
     </div>
 </div>
+
+<!-- Load Script to update the min time for the Event starttime to now + 12 hours -->
+<script src="{% static 'js/formupdate.js' %}"></script>
 
 <!-- If User is not authenticated, display message to signup/register and then redirect to home -->
 {% else %}
