@@ -15,13 +15,23 @@
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <img src="{% static 'img/cinema-slider.jpg' %}" class="d-block w-100" alt="A group of people enjoying a Movie in a Cinema.">
+                    <div class="carousel-caption d-none d-md-block">
+                        <p class="overlay-headline">Tomodachi (友達) will help you to make new friends and rekindle old relationships.</p>
+                    </div>
                 </div>
               
                 <div class="carousel-item">
                     <img src="{% static 'img/gaming-slider.jpg' %}" class="d-block w-100" alt="Two Girls on a couch playing videogames.">
+                    <div class="carousel-caption d-none d-md-block">
+                        <p class="overlay-headline">Create Events both Online and Offline. Share them with friends. Enjoy your Time.</p>
+                    </div>
                 </div>
+
                 <div class="carousel-item">
                     <img src="{% static 'img/camping-slider.jpg' %}" class="d-block w-100" alt="Two Girls outside camping in front of a campfire.">
+                    <div class="carousel-caption d-none d-md-block">
+                        <p class="overlay-headline">What are your plans for the weekend? Something chill? Something adventurous?</p>
+                    </div>
                 </div>
             </div>
         
@@ -36,7 +46,7 @@
             </button>
         </div>
     </div>
-          
+     
     <div class="row">
         <p class="index-headline">Tomodachi lets you create and share Events and meet up with new people.</p>
         
@@ -69,16 +79,16 @@
                         <div class="card-body">
                             <!-- Display Category with color coded background -->
                             <p class="category text-center {{ event.category_verbose }}">
-                              {{ event.category_verbose }}
-                              <!-- Show Calendar sign if you created the Event, same as in Navbar -->
-                              {% if event.author == request.user %}
-                              <i class="fa-solid fa-calendar-days"></i>
-                              {% endif %}
+                                {{ event.category_verbose }}
+                                <!-- Show Calendar sign if you created the Event, same as in Navbar -->
+                                {% if event.author == request.user %}
+                                <i class="fa-solid fa-calendar-days"></i>
+                                {% endif %}
 
-                              <!-- Show Checkmark sign if you joined the Event -->
-                              {% if request.user in event.attendees.all %}
-                              <i class="fa-solid fa-check"></i>
-                              {% endif %}
+                                <!-- Show Checkmark sign if you joined the Event -->
+                                {% if request.user in event.attendees.all %}
+                                <i class="fa-solid fa-check"></i>
+                                {% endif %}
                             </p>
                                 
                             <!-- Display basic quick event infos for overview -->
