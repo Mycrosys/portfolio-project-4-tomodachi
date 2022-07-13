@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load crispy_forms_tags %}
 {% load i18n %}
 {% load account socialaccount %}
 
@@ -8,28 +8,25 @@
 {% block content %}
 
 <div class="container">
-  <div class="row">
-    <div class="col-md-8 mt-3 offset-md-2">
-      <p class="event-headline">{% trans "Sign In" %}</p>
-      <p class="text-main text-center">{% blocktrans %}Welcome to Tomodachi! If you have not created an account yet, and want
-        to start creating, sharing and attending Events, please
-      <a class="link" href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+    <div class="row">
+        <div class="col-md-6 mt-3 offset-md-3">
+            <p class="event-headline">{% trans "Sign In" %}</p>
+            <p class="text-main text-center">{% blocktrans %}Welcome to Tomodachi! If you have not
+                created an account yet, and want to start creating, sharing and attending Events, please
+                <a class="link" href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+    
+            <form class="text-main" method="POST" action="{% url 'account_login' %}">
+                {% csrf_token %}
+                {{ form|crispy }}
+                {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+                <p>* Required</p>
+                <div class="text-center">
+                    <button class="btn btn-signup" type="submit">{% trans "Sign In" %}</button>  
+                </div>
+            </form>
+        </div>
     </div>
-  </div>
-
-  <div class="row">
-    <div class="cold-md-12 mt-3 text-center text-main">
-      <form class="login" method="POST" action="{% url 'account_login' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        {% if redirect_field_value %}
-        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-        {% endif %}
-        <button class="btn btn-signup" type="submit">{% trans "Sign In" %}</button>
-      </form>
-    </div>
-  </div>
 </div>
-
-
 {% endblock %}
