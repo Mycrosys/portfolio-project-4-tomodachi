@@ -2,18 +2,16 @@
 {% load crispy_forms_tags %}
 {% load static %}
 
-<!-- User needs to be Authenticated to Create Events -->
+<!-- User needs to be Authenticated to Browse Events -->
 {% if user.is_authenticated %}
 <div class="container">
     <div class="row">
         <div class="col-md-8 mt-1 offset-md-2">
-            <p class="event-headline"">Browse Events</p>
+            <p class="event-headline">Browse Events</p>
             <div class="text-main">
                 <!-- Load Eventform from forms.py with crispyforms -->
-                <form method="POST">
-                    {% crispy browse_form %}
-                    {% csrf_token %}
-                </form>
+                {% crispy browse_form %}
+                {% csrf_token %}
             </div>
         </div>
     </div>
