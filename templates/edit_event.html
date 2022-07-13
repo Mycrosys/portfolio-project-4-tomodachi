@@ -13,6 +13,7 @@
                 <form method="POST">
                     {{ event_form | crispy }}
                     {% csrf_token %}
+                    <p>* Required</p>
                     <p>If you make any modifications, the Event start time needs to be at least 12 hours in the future.</p>
                     <div class="text-center">
                         <input id="create-button" class="btn btn-edit" type="submit" value="Update Event">

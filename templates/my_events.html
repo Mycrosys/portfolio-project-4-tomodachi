@@ -20,10 +20,8 @@
                                 <!-- Show Calendar sign if you created the Event, same as in Navbar -->
                                 {% if event.author == request.user %}
                                 <i class="fa-solid fa-calendar-days"></i>
-                                {% endif %}
-                                
                                 <!-- Show Checkmark sign if you joined the Event -->
-                                {% if request.user in event.attendees.all %}
+                                {% elif request.user in event.attendees.all %}
                                 <i class="fa-solid fa-check"></i>
                                 {% endif %}
                             </p>
@@ -65,7 +63,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-signup" data-bs-dismiss="modal">Cancel</button>
-                                <button class="btn btn-signup" onclick="location.href='{% url 'delete_event' event.id %}'">
+                                <button class="btn btn-signup" onclick="location.href='{% url 'delete_event' event.id %}';">
                                     Delete Event
                                 </button>
                             </div>
@@ -105,10 +103,8 @@
                                 <!-- Show Calendar sign if you created the Event, same as in Navbar -->
                                 {% if event.author == request.user %}
                                 <i class="fa-solid fa-calendar-days"></i>
-                                {% endif %}
-                                
                                 <!-- Show Checkmark sign if you joined the Event -->
-                                {% if request.user in event.attendees.all %}
+                                {% elif request.user in event.attendees.all %}
                                 <i class="fa-solid fa-check"></i>
                                 {% endif %}
                             </p>

@@ -13,7 +13,12 @@
                 <form method="POST">
                     {{ event_form | crispy }}
                     {% csrf_token %}
-                    <p>Events need to be created at least 12 hours before they are taking place.</p>
+                    <p>* Required</p>
+                    <p>
+                        Events need to be created at least 12 hours before they are taking place.
+                        Also take notice, that as the creator of the Event, you will automatically
+                        also be an attendee.
+                    </p>
                     <div class="text-center">
                         <input id="create-button" class="btn btn-edit" type="submit" value="Create Event">
                         <button id="reset-button" class="btn btn-reset" type="reset">Reset</button>

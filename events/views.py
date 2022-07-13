@@ -64,8 +64,12 @@ class EventMy(View):
             location_time__gt=timezone.now())
         # Created Events are the ones the logged in user is the author
         created_event = queryset.filter(author=self.request.user.id)
+        
         # Joined Events are the ones the logged in user is an attendee
         joined_event = queryset.filter(attendees=self.request.user.id)
+        # Exclude the events where the user is also the author, because
+        # as the creator of the event you always need to attend
+        joined_event = joined_event.exclude(author=self.request.user.id)
 
         return render(
             request,

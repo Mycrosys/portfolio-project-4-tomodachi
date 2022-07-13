@@ -34,10 +34,8 @@
                                 <!-- Show Calendar sign if you created the Event, same as in Navbar -->
                                 {% if event.author == request.user %}
                                 <i class="fa-solid fa-calendar-days"></i>
-                                {% endif %}
-                                
                                 <!-- Show Checkmark sign if you joined the Event -->
-                                {% if request.user in event.attendees.all %}
+                                {% elif request.user in event.attendees.all %}
                                 <i class="fa-solid fa-check"></i>
                                 {% endif %}
                             </p>
