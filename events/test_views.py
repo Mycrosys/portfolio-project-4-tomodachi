@@ -5,12 +5,12 @@ from .models import Event
 
 class TestViewsPages(TestCase):
     """
-    Tests for Views, which are used for used for routing
+    Tests for Views, which are used for routing
     to the correct link and using the correct templates
     """
     def setUp(self):
         """
-        Setup Class for all Tests in TestViewsPages
+        Setup Method for all Tests in TestViewsPages
         """
         # Create the User so all Pages are available
         self.user = User.objects.create_user(username='testuser',
@@ -18,7 +18,7 @@ class TestViewsPages(TestCase):
 
     def tearDown(self):
         """
-        Teardown Class for all Tests in TestViewsPages
+        Teardown Method for all Tests in TestViewsPages
         (Cleans up the setup)
         """
         self.user.delete()
@@ -26,7 +26,7 @@ class TestViewsPages(TestCase):
     def test_get_home_page(self):
         """
         Tests if the correct template for the Index Page is
-        used and it linking up fine.
+        used and links up fine.
         """
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
@@ -35,7 +35,7 @@ class TestViewsPages(TestCase):
     def test_get_register_page(self):
         """
         Tests if the correct template for the Register Account
-        Page is used and it linking up fine.
+        Page is used and links up fine.
         """
         response = self.client.get('/accounts/signup/')
         self.assertEqual(response.status_code, 200)
@@ -44,7 +44,7 @@ class TestViewsPages(TestCase):
     def test_get_login_page(self):
         """
         Tests if the correct template for the Login
-        Page is used and it linking up fine.
+        Page is used and links up fine.
         """
         # Needs to be logged out so this page is available
         response = self.client.get('/accounts/login/')
@@ -54,7 +54,7 @@ class TestViewsPages(TestCase):
     def test_get_logout_page(self):
         """
         Tests if the correct template for the Logout
-        Page is used and it linking up fine.
+        Page is used and links up fine.
         """
         # Needs to be logged in so this page is available
         self.client.login(username='testuser', password='12345')
@@ -65,7 +65,7 @@ class TestViewsPages(TestCase):
     def test_get_my_events_page(self):
         """
         Tests if the correct template for the My Events
-        Page is used and it linking up fine.
+        Page is used and links up fine.
         """
         response = self.client.get('/my_events/')
         self.assertEqual(response.status_code, 200)
@@ -74,7 +74,7 @@ class TestViewsPages(TestCase):
     def test_get_create_events_page(self):
         """
         Tests if the correct template for the Create Event
-        Page is used and it linking up fine.
+        Page is used and links up fine.
         """
         response = self.client.get('/create_event/')
         self.assertEqual(response.status_code, 200)
@@ -83,7 +83,7 @@ class TestViewsPages(TestCase):
     def test_get_browse_events_page(self):
         """
         Tests if the correct template for the Browse Event
-        Page is used and it linking up fine.
+        Page is used and links up fine.
         """
         response = self.client.get('/browse_event/')
         self.assertEqual(response.status_code, 200)
@@ -98,17 +98,21 @@ class TestViewsActions(TestCase):
 
     def setUp(self):
         """
-        Setup Class for all Tests in TestViewsActions
+        Setup Method for all Tests in TestViewsActions
         """
+        # Create a testuser and log in. This is required for
+        # many operations
         self.user = User.objects.create_user(username='testuser',
                                              password='12345')
         self.client.login(username='testuser', password='12345')
 
     def tearDown(self):
         """
-        Teardown Class for all Tests in TestViewsActions
+        Teardown Method for all Tests in TestViewsActions
         (Cleans up the setup)
         """
+        # Logs out the testuser and deletes it from the test
+        # Database
         self.client.logout()
         self.user.delete()
 
@@ -116,12 +120,14 @@ class TestViewsActions(TestCase):
         """
         Tests if the Filter in Browse Events works correctly
         """
+        # Create a test Event in the Database
         Event.objects.create(title='Watching Squid Game!',
                                    category='CIN',
                                    summary='Watching on Netflix!',
                                    location_area='Meeting at Charlies!',
                                    location_time='2022-12-14 12:00:00+00:00',
                                    author=self.user)
+        # Post Form with settings that should not return any results
         response = self.client.post('/browse_event/',
                                     {'searchstring': 'Netflix',
                                      'online': 'False',
@@ -139,12 +145,14 @@ class TestViewsActions(TestCase):
         """
         Tests if the Filter in Browse Events works correctly
         """
+        # Create a test Event in the Database
         Event.objects.create(title='Watching Squid Game!',
                                    category='CIN',
                                    summary='Watching on Netflix!',
                                    location_area='Meeting at Charlies!',
                                    location_time='2022-12-14 12:00:00+00:00',
                                    author=self.user)
+        # Post Form with settings that should return one results
         response = self.client.post('/browse_event/',
                                     {'searchstring': 'Netflix',
                                      'online': 'False',
@@ -163,15 +171,14 @@ class TestViewsActions(TestCase):
         Tests if the correct template for the Modify Event
         Page is used and it linking up fine.
         """
-
-        # The User must be logged in and be the creator of the
-        # Event to not be redirected back to the Index Page
+        # Create a test Event in the Database
         event = Event.objects.create(title='Watching Squid Game!',
                                      category='CIN',
                                      summary='Watching on Netflix!',
                                      location_area='Meeting at Charlies!',
                                      location_time='2022-12-14 12:00:00+00:00',
                                      author=self.user)
+        # Enter Modify Page of the created Event
         response = self.client.get(f'/edit/{event.id}/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'edit_event.html')
@@ -180,15 +187,14 @@ class TestViewsActions(TestCase):
         """
         Tests if the author of an Event can modify his own Event
         """
-
-        # The User must be logged in and be the creator of the
-        # Event to not be redirected back to the Index Page
+        # Create a test Event in the Database
         event = Event.objects.create(title='Watching Squid Game!',
                                      category='CIN',
                                      summary='Watching on Netflix!',
                                      location_area='Meeting at Charlies!',
                                      location_time='2022-12-14 12:00:00+00:00',
                                      author=self.user)
+        # Post Form with updated Title
         response = self.client.post(f'/edit/{event.id}/',
                                     {'title': 'Netflix Watchparty!',
                                      'category': 'CIN',
@@ -205,19 +211,19 @@ class TestViewsActions(TestCase):
         Tests if you can not modify an Event if you are not
         its author.
         """
-
-        # The User must be logged in and be the creator of the
-        # Event to not be redirected back to the Index Page
+        # Create a test Event in the Database
         event = Event.objects.create(title='Watching Squid Game!',
                                      category='CIN',
                                      summary='Watching on Netflix!',
                                      location_area='Meeting at Charlies!',
                                      location_time='2022-12-14 12:00:00+00:00',
                                      author=self.user)
+        # Logout current user and log in with a second one
         self.client.logout()
         self.user = User.objects.create_user(username='testuser2',
                                              password='12346')
         self.client.login(username='testuser2', password='12346')
+        # Try to update the Event created by another User
         response = self.client.post(f'/edit/{event.id}/',
                                     {'title': 'Netflix Watchparty!',
                                      'category': 'CIN',
@@ -234,19 +240,14 @@ class TestViewsActions(TestCase):
         Tests if you can not modify an Event if you are not
         its author.
         """
-
-        # The User must be logged in and be the creator of the
-        # Event to not be redirected back to the Index Page
+        # Create a test Event in the Database
         event = Event.objects.create(title='Watching Squid Game!',
                                      category='CIN',
                                      summary='Watching on Netflix!',
                                      location_area='Meeting at Charlies!',
                                      location_time='2022-12-14 12:00:00+00:00',
                                      author=self.user)
-        self.client.logout()
-        self.user = User.objects.create_user(username='testuser2',
-                                             password='12346')
-        self.client.login(username='testuser2', password='12346')
+        # Invalid Submission Form because the summary Field is left empty
         response = self.client.post(f'/edit/{event.id}/',
                                     {'title': 'Netflix Watchparty!',
                                      'category': 'CIN',
@@ -263,9 +264,7 @@ class TestViewsActions(TestCase):
         Tests if the correct template for the Event Detail
         Page is used and it linking up fine.
         """
-
-        # The User must be logged in to view and not be
-        # redirected to the Index Page
+        # Create a test Event in the Database
         event = Event.objects.create(title='Watching Squid Game!',
                                      category='CIN',
                                      summary='Watching on Netflix!',
@@ -280,6 +279,7 @@ class TestViewsActions(TestCase):
         """
         Tests if the created Event is being deleted.
         """
+        # Create a test Event in the Database
         event = Event.objects.create(title='Watching Squid Game!',
                                      category='CIN',
                                      summary='Watching on Netflix!',
@@ -289,7 +289,7 @@ class TestViewsActions(TestCase):
         response = self.client.get(f'/delete/{event.id}/')
         self.assertRedirects(response, '/my_events/')
 
-        # get the existing events and check if it is empty
+        # get the existing events and check if it there are none
         existing_events = Event.objects.filter(id=event.id)
         self.assertEqual(len(existing_events), 0)
 
@@ -298,12 +298,14 @@ class TestViewsActions(TestCase):
         Tests if the created Event can be deleted if you
         are not the author.
         """
+        # Create a test Event in the Database
         event = Event.objects.create(title='Watching Squid Game!',
                                      category='CIN',
                                      summary='Watching on Netflix!',
                                      location_area='Meeting at Charlies!',
                                      location_time='2022-12-14 12:00:00+00:00',
                                      author=self.user)
+        # Logout current user and log in with a second one
         self.client.logout()
         self.user = User.objects.create_user(username='testuser2',
                                              password='12346')
@@ -341,7 +343,7 @@ class TestViewsActions(TestCase):
         """
         Tests if an Event can be created with the create_event Page.
         """
-
+        # Create a test Event via the Form Submission
         # Title is left empty which leads to invalid submission
         response = self.client.post('/create_event/',
                                     {'title': '',
@@ -360,12 +362,15 @@ class TestViewsActions(TestCase):
         """
         Tests if you can join an Event.
         """
+        # Create a test Event in the Database
         event = Event.objects.create(title='Watching Squid Game!',
                                      category='CIN',
                                      summary='Watching on Netflix!',
                                      location_area='Meeting at Charlies!',
                                      location_time='2022-12-14 12:00:00+00:00',
                                      author=self.user)
+        # Logout current user and log in with a second one
+        self.client.logout()
         self.user = User.objects.create_user(username='testuser2',
                                              password='12346')
         self.client.login(username='testuser2', password='12346')
@@ -380,12 +385,18 @@ class TestViewsActions(TestCase):
         Tests if you can join an Event if you are already
         are an Attendee.
         """
+        # Create a test Event in the Database
         event = Event.objects.create(title='Watching Squid Game!',
                                      category='CIN',
                                      summary='Watching on Netflix!',
                                      location_area='Meeting at Charlies!',
                                      location_time='2022-12-14 12:00:00+00:00',
                                      author=self.user)
+        # Logout current user and log in with a second one
+        self.client.logout()
+        self.user = User.objects.create_user(username='testuser2',
+                                             password='12346')
+        self.client.login(username='testuser2', password='12346')
         # Add one Attendee for a total of 1
         event.attendees.add(self.user)
         response = self.client.get(f'/join/{event.id}/')
@@ -398,12 +409,15 @@ class TestViewsActions(TestCase):
         """
         Tests if you can leave an Event.
         """
+        # Create a test Event in the Database
         event = Event.objects.create(title='Watching Squid Game!',
                                      category='CIN',
                                      summary='Watching on Netflix!',
                                      location_area='Meeting at Charlies!',
                                      location_time='2022-12-14 12:00:00+00:00',
                                      author=self.user)
+        # Logout current user and log in with a second one
+        self.client.logout()
         self.user = User.objects.create_user(username='testuser2',
                                              password='12346')
         self.client.login(username='testuser2', password='12346')
@@ -424,6 +438,8 @@ class TestViewsActions(TestCase):
                                      location_area='Meeting at Charlies!',
                                      location_time='2022-12-14 12:00:00+00:00',
                                      author=self.user)
+        # Logout current user and log in with a second one
+        self.client.logout()
         self.user = User.objects.create_user(username='testuser2',
                                              password='12346')
         self.client.login(username='testuser2', password='12346')

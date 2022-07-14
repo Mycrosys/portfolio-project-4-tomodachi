@@ -10,17 +10,21 @@ class TestModels(TestCase):
 
     def setUp(self):
         """
-        Setup Class for all Tests in TestModels
+        Setup Method for all Tests in TestModels
         """
+        # Create a testuser and log in. This is required for
+        # many operations
         self.user = User.objects.create_user(username='testuser',
                                              password='12345')
         self.client.login(username='testuser', password='12345')
 
     def tearDown(self):
         """
-        Teardown Class for all Tests in TestModels
-        (Cleans up the setup)
+        Teardown Method for all Tests in TestModels
+        (Cleans up the setUp Method)
         """
+        # Logs out the testuser and deletes it from the test
+        # Database
         self.client.logout()
         self.user.delete()
 
@@ -29,7 +33,7 @@ class TestModels(TestCase):
         Tests if location_online will be false if no value
         is given upon creation of the Model
         """
-
+        # Create test Event in the Database
         event = Event.objects.create(title='Watching Squid Game!',
                                      category='CIN',
                                      summary='Watching on Netflix!',
@@ -42,7 +46,7 @@ class TestModels(TestCase):
         """
         Tests if method returns the title of the Event
         """
-
+        # Create test Event in the Database
         event = Event.objects.create(title='Watching Squid Game!',
                                      category='CIN',
                                      summary='Watching on Netflix!',

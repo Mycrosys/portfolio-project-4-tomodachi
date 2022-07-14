@@ -5,7 +5,8 @@ from .forms import EventForm, BrowseForm
 class TestEventForm(TestCase):
     """
     Tests for EventForm, which is used both for creating an Event and
-    for modifying existing Events.
+    for modifying existing Events. It tests if fields are truly required
+    or not.
     """
 
     def test_event_title_is_required(self):
