@@ -3,7 +3,7 @@ from . import views
 
 
 urlpatterns = [
-    # Home/Index Page 
+    # Home/Index Page
     path('', views.EventList.as_view(), name='home'),
 
     # Event Detail Page

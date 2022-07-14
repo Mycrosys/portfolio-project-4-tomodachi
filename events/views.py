@@ -2,9 +2,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic, View
 from django.utils import timezone
 from django.contrib import messages
+from django.db.models import Q
 from .models import Event
 from .forms import EventForm, BrowseForm
-from django.db.models import Q
+
 
 class EventList(generic.ListView):
     """
@@ -62,11 +63,13 @@ class EventMy(View):
         # Filter Events to only the ones that happen now and in the future
         queryset = Event.objects.order_by('location_time').filter(
             location_time__gt=timezone.now())
+
         # Created Events are the ones the logged in user is the author
         created_event = queryset.filter(author=self.request.user.id)
-        
+
         # Joined Events are the ones the logged in user is an attendee
         joined_event = queryset.filter(attendees=self.request.user.id)
+
         # Exclude the events where the user is also the author, because
         # as the creator of the event you always need to attend
         joined_event = joined_event.exclude(author=self.request.user.id)
@@ -270,6 +273,7 @@ class EventEdit(View):
             request,
             "edit_event.html",
             {
+                "event": event,
                 "event_form": event_form
             },
         )
@@ -290,7 +294,7 @@ class EventEdit(View):
         event_form = EventForm(data=request.POST, instance=event)
 
         # Check if form is valid
-        if event_form.is_valid():
+        if event_form.is_valid() and event.author == request.user:
             # Save the form to create an Event ID automatically
             event = event_form.save()
             # Create a feedback message that the Event was updated
@@ -299,7 +303,8 @@ class EventEdit(View):
 
         else:
             # If the form is not valid, create and display an Error message
-            feedback = "Submission invalid. Please try again."
+            feedback = "Submission invalid. Or you are not the author of the"
+            feedback += " Event. Please try again if you are the author."
             messages.add_message(request, messages.ERROR, feedback)
 
         # redirect to My Events
@@ -370,7 +375,7 @@ class EventBrowse(View):
 
             # Searchstring
             # Check if it contains anything then execute the code
-            if not browse_form.cleaned_data['searchstring'] =="":
+            if not browse_form.cleaned_data['searchstring'] == "":
                 searchstring = browse_form.cleaned_data['searchstring']
 
                 # Find the searchstring either in the title,
@@ -391,6 +396,8 @@ class EventBrowse(View):
 
         else:
             # If the form is not valid, create and display an Error message
+            # This can actually never happen, because there are no required
+            # Fields so an invalid Submission shouldn't be possible at all
             feedback = "Submission invalid. Please try again."
             messages.add_message(request, messages.ERROR, feedback)
             return redirect('browse_event')

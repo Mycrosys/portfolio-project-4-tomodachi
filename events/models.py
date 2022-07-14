@@ -25,12 +25,13 @@ class Event(models.Model):
     location_online: If the Event doesn't need physical attendance
                      but instead uses Online ressources (e.g Discord)
     -----------------------------------------------------------------
-    location_are:    The Location it takes place (e.g. address)
+    location_area:   The Location it takes place (e.g. address)
     -----------------------------------------------------------------
     location_time:   The Time the Event starts.
     -----------------------------------------------------------------
     """
 
+    # Cathegories are listed here
     DINING = 'DIN'
     CINEMA = 'CIN'
     GAMING = 'GAM'

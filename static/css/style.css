@@ -227,7 +227,9 @@ fieldset {
     font-size: 2rem;
     margin-bottom: 15px;
     color: #f1faee;
-    background-color: rgba(29, 53, 87, .7)
+    background-color: rgba(29, 53, 87, .7);
+    border-radius: 15px;
+    padding: 10px;
 }
 
 /* Buttons */

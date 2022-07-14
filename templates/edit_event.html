@@ -3,11 +3,11 @@
 {% load static %}
 
 <!-- User needs to be Authenticated to Modify Events -->
-{% if user.is_authenticated %}
+{% if user.is_authenticated and event.author == request.user %}
 <div class="container">
     <div class="row">
         <div class="col-md-8 mt-1 offset-md-2">
-            <p class="event-headline"">Modify Event</p>
+            <p class="event-headline">Modify Event</p>
             <div class="text-main">
                 <!-- Load Eventform from forms.py with crispyforms -->
                 <form method="POST">
@@ -33,7 +33,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 mt-3 offset-md-2">
-            <p class="text-main">You need to be logged in to create Events. Please 
+            <p class="text-main">You need to be logged in to modify Events. You also need to
+                be the Event creator or you cannot modify it. Please 
                 <a class="link" href="{{ login_url }}">log in</a> or 
                 <a class="link" href="{{ signup_url }}">sign up</a> first.<br>
                 You will be redirected to the Index Page in a few seconds.
