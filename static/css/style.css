@@ -5,6 +5,20 @@ body {
     font-size: 1.2rem;
 }
 
+/* Removing Padding and Margin from Bootstrap classes */
+
+.container-fluid, .container {
+    padding: 0;
+}
+
+.row {
+    margin: 0;
+}
+
+.carousel {
+    padding: 0;
+}
+
 /* Navbar */
 
 .navbar {
@@ -34,20 +48,6 @@ body {
 .user-display {
     display: block;
     padding: 0.5rem 0;
-}
-
-/* Removing Padding and Margin from Bootstrap classes */
-
-.container-fluid, .container {
-    padding: 0;
-}
-
-.row {
-    margin: 0;
-}
-
-.carousel {
-    padding: 0;
 }
 
 /* Headlines */
@@ -102,6 +102,10 @@ body {
 .aboutsite {
     margin-bottom: 10px;
     padding: 20px 40px 0px;
+}
+
+.aboutsite img {
+    margin-bottom: 20px;
 }
 
 /* Main Font */
