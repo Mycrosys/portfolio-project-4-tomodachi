@@ -25,7 +25,7 @@ class EventList(generic.ListView):
 class EventDetail(View):
     """
     Displays the Event Detail Page of a certain selected
-    Event (defined by Event ID)
+    Event using the Event ID
     """
 
     def get(self, request, pk):
@@ -51,7 +51,7 @@ class EventDetail(View):
 class EventMy(View):
     """
     Displays the My Events Page with created and joined Events by
-    the logged in User.
+    the logged-in User.
     """
 
     def get(self, request):
@@ -111,15 +111,15 @@ class EventCreate(View):
         # Get the Values from the Event Form
         event_form = EventForm(data=request.POST)
 
-        # Check if form is valid
+        # Check if the form is valid
         if event_form.is_valid():
             # Set the author to the logged in user
             event_form.instance.author = request.user
-            # Save the form to create an Event ID automatically
-            # The Event ID is only created with saving,
+            # Save the form to create an Event
+            # Attendees can only be added afterwards,
             # so this is a necessary step
             event = event_form.save()
-            # Add the current User as Attendee (required)
+            # Add the current User as Attendee
             event.attendees.add(request.user)
             # Create a feedback message that the Event was created
             feedback = "Successfully created Event " + event.title + "."
@@ -179,7 +179,7 @@ class EventRemoveAttendee(View):
 
     def get(self, request, pk):
         """
-        Removes the participation of the logged in User in an Event
+        Removes the the logged-in User from the Attendee list of an Event
         """
 
         # Filter Events to only the ones that happen now and in the future
@@ -295,7 +295,7 @@ class EventEdit(View):
 
         # Check if form is valid
         if event_form.is_valid() and event.author == request.user:
-            # Save the form to create an Event ID automatically
+            # Save the Form
             event = event_form.save()
             # Create a feedback message that the Event was updated
             feedback = "Successfully modified Event " + event.title + "."
@@ -350,14 +350,14 @@ class EventBrowse(View):
 
             event_list = base_list
 
-            # online/offline
+            # online/offline - exclude if not checked
             if not browse_form.cleaned_data['online']:
                 event_list = event_list.exclude(location_online=True)
 
             if not browse_form.cleaned_data['offline']:
                 event_list = event_list.exclude(location_online=False)
 
-            # Categories being handled
+            # Categories - exclude if not checked
             if not browse_form.cleaned_data['dining']:
                 event_list = event_list.exclude(category='DIN')
 
@@ -373,8 +373,7 @@ class EventBrowse(View):
             if not browse_form.cleaned_data['camping']:
                 event_list = event_list.exclude(category='CAM')
 
-            # Searchstring
-            # Check if it contains anything then execute the code
+            # Searchstring, first check if it contains anything
             if not browse_form.cleaned_data['searchstring'] == "":
                 searchstring = browse_form.cleaned_data['searchstring']
 

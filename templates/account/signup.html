@@ -18,6 +18,7 @@
     </div>
     <div class="row">
         <div class="col-md-6 mt-3 offset-md-3">
+            <!-- Signup Form styled with crispyforms -->
             <form class="text-main" id="signup_form" method="post" action="{% url 'account_signup' %}">
                 {% csrf_token %}
                 {{ form|crispy }}

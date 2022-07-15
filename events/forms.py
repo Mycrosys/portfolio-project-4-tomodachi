@@ -49,14 +49,18 @@ class BrowseForm(forms.Form):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_method = 'POST'
+        
+        # Layout of the form
         self.helper.layout = Layout(
             'searchstring',
 
+            # Combine online/offline in one Row
             Row(
                 Column('online', css_class='col-md-6 mb-0'),
                 Column('offline', css_class='col-md-6 mb-0'),
                 css_class='text-center'),
 
+            # Combine the categories in a Fieldset and two Rows
             Fieldset(
                 'Categories',
                 Row(
@@ -70,6 +74,7 @@ class BrowseForm(forms.Form):
                     css_class='category-form',),
             ),
 
+            # Centered Submit Button called Filter
             Div(Submit('submit', 'Filter', css_class='btn btn-crispy'),
                 css_class='text-center',)
         )

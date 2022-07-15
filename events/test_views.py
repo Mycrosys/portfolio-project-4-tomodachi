@@ -289,7 +289,7 @@ class TestViewsActions(TestCase):
         response = self.client.get(f'/delete/{event.id}/')
         self.assertRedirects(response, '/my_events/')
 
-        # get the existing events and check if it there are none
+        # get the existing events and check if there are none
         existing_events = Event.objects.filter(id=event.id)
         self.assertEqual(len(existing_events), 0)
 

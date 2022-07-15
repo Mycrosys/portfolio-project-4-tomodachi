@@ -16,14 +16,14 @@ class Event(models.Model):
     modified_on:     Time of last modification of the Database Entry.
     -----------------------------------------------------------------
     summary:         The Bulk of the Information of said Event. What
-                     is planned, how is it supposed to unfold etc.
+                     is planned, how is it supposed to unfold, etc.
     -----------------------------------------------------------------
     attendees:       Contains all the Users attending the Event.
     -----------------------------------------------------------------
     category:        The Event Category.
     -----------------------------------------------------------------
     location_online: If the Event doesn't need physical attendance
-                     but instead uses Online ressources (e.g Discord)
+                     but instead uses Online resources (e.g Discord)
     -----------------------------------------------------------------
     location_area:   The Location it takes place (e.g. address)
     -----------------------------------------------------------------
@@ -64,14 +64,14 @@ class Event(models.Model):
 
     class Meta:
         """
-        Metaclass - Ordering by Time the Events take place
+        Metaclass - Ordering by Time the Events takes place
         """
 
         ordering = ['-location_time']
 
     def __str__(self):
         """
-        Returns name of an Event
+        Returns the name of an Event
         """
 
         return self.title
