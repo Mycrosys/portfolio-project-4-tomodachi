@@ -75,6 +75,6 @@ class BrowseForm(forms.Form):
             ),
 
             # Centered Submit Button called Filter
-            Div(Submit('submit', 'Filter', css_class='btn btn-crispy'),
+            Div(Submit('submit', 'Filter', css_class='btn btn-confirm'),
                 css_class='text-center',)
         )

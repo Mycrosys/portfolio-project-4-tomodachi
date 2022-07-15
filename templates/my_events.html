@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-10 mt-3 offset-md-1">
-            <p class="event-headline">My Created Events</p>
+            <p class="page-headline">My Created Events</p>
             <p class="text-center text-main">Only Events that haven't started yet are shown.</p>
             <!-- Created Events Column -->
             <div class="row">
@@ -36,13 +36,13 @@
                         
                         <!-- Display buttons for opening detail view, modify event or event deletion -->
                         <p class="text-center">
-                            <a href="{% url 'event_detail' event.id %}" class="post-link" target="_blank">
-                                <span class="btn btn-signup">View Details</span>
+                            <a href="{% url 'event_detail' event.id %}" target="_blank">
+                                <span class="btn btn-confirm">View Details</span>
                             </a>
-                            <a href="{% url 'edit_event' event.id %}" class="post-link">
-                                <span class="btn btn-signup">Modify Event</span>
+                            <a href="{% url 'edit_event' event.id %}">
+                                <span class="btn btn-confirm">Modify Event</span>
                             </a>
-                            <button type="button" class="btn btn-signup" data-bs-toggle="modal" data-bs-target="#staticBackdrop_{{ event.id }}">
+                            <button type="button" class="btn btn-confirm" data-bs-toggle="modal" data-bs-target="#staticBackdrop_{{ event.id }}">
                                 Delete Event
                             </button>
                         </p>
@@ -62,8 +62,8 @@
                                 This action can not be reversed.
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-signup" data-bs-dismiss="modal">Cancel</button>
-                                <button class="btn btn-signup" onclick="location.href='{% url 'delete_event' event.id %}';">
+                                <button type="button" class="btn btn-confirm" data-bs-dismiss="modal">Cancel</button>
+                                <button class="btn btn-confirm" onclick="location.href='{% url 'delete_event' event.id %}';">
                                     Delete Event
                                 </button>
                             </div>
@@ -87,7 +87,7 @@
 
     <div class="row">
         <div class="col-md-10 mt-3 offset-md-1">
-            <p class="event-headline">My Joined Events</p>
+            <p class="page-headline">My Joined Events</p>
             <p class="text-center text-main">Only Events that haven't started yet are shown.
                 You cannot leave an Event you have created. Please delete it instead.</p>
             <!-- Joined Events Column -->
@@ -119,14 +119,14 @@
                         
                         <!-- Display buttons for opening detail view -->
                         <p class="text-center">
-                            <a href="{% url 'event_detail' event.id %}" class="post-link">
-                                <span class="btn btn-signup">View Details</span>
+                            <a href="{% url 'event_detail' event.id %}">
+                                <span class="btn btn-confirm">View Details</span>
                             </a>
                             
                             <!-- Display buttons for leaving an event if you are not the author of it -->
                             {% if not request.user == event.author %}
-                            <a href="{% url 'leave_event' event.id %}" class="post-link">
-                                <span class="btn btn-signup">Leave Event</span>
+                            <a href="{% url 'leave_event' event.id %}">
+                                <span class="btn btn-confirm">Leave Event</span>
                             </a>
                             {% endif %}  
                         </p>

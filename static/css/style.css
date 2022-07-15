@@ -5,6 +5,12 @@ body {
     font-size: 1.2rem;
 }
 
+/* Remove all text decoration from links */
+
+a {
+    text-decoration: none;
+}
+
 /* Removing Padding and Margin from Bootstrap classes */
 
 .container-fluid, .container {
@@ -58,6 +64,8 @@ body {
     font-weight: 600;
     color: #1d3557;
     margin-left: 10px;
+    font-style: normal;
+    font-weight: bold;
 }
 
 .index-headline {
@@ -66,28 +74,26 @@ body {
     font-size: 2.2rem;
     margin-top: 35px;
     margin-bottom: 15px;
+    font-style: normal;
+    font-weight: bold;
 }
 
-.event-headline {
+.aboutsite-subheadline {
+    font-family: 'Arimo', sans-serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.page-headline {
     text-align: center;
     font-family: 'Arimo', sans-serif;
     font-size: 1.7rem;
     margin-top: 20px;
     text-decoration: underline;
-}
-
-.aboutsite-headline {
-    font-family: 'Arimo', sans-serif;
-    font-weight: 600;
-    font-size: 1.2rem;
-}
-
-.upcoming-headline {
-    text-align: center;
-    font-family: 'Arimo', sans-serif;
-    font-size: 2.2rem;
-    margin-top: 10px;
-    margin-bottom: 15px;
+    font-style: normal;
+    font-weight: bold;
 }
 
 .event-detail-title {
@@ -95,6 +101,8 @@ body {
     font-size: 1.7rem;
     margin-bottom: 15px;
     font-weight: 900;
+    font-style: normal;
+    font-weight: bold;
 }
 
 /* Index Page section About */
@@ -118,7 +126,7 @@ body {
     font-size: 1.2rem;
 }
 
-/* Cards */
+/* Cards for displaying Events */
 
 .card {
     border: 1px solid #1d3557;
@@ -141,21 +149,20 @@ body {
 
 /* Classes for Categories */
 
-.category {
+.category,
+.category-detail {
     color: #f1faee;
     margin: 4px 0;
     text-transform: uppercase;
     font-size: 1rem;
     font-weight: 800;
     letter-spacing: 2px;
+    font-style: normal;
 }
 
 .category-detail {
-    color: #f1faee;
     margin: 12px 0;
-    text-transform: uppercase;
     font-size: 1.5rem;
-    font-weight: 800;
 }
 
 .dining {
@@ -178,7 +185,7 @@ body {
     background-color: #850073;
 }
 
-/* Forms */
+/* Browse Event Form */
 
 .category-form {
     margin-left: 25px;
@@ -192,19 +199,8 @@ fieldset {
 
 /* Links */
 
-.post-link {
-    color: #e63946;
-    text-decoration: none;
-}
-
-.post-link:hover,
-.page-link {
-    color: #e63946;
-}
-
 .link {
     color: #e63946;
-    text-decoration: none;
     font-weight: bold;
 }
 
@@ -236,23 +232,16 @@ fieldset {
     padding: 10px;
 }
 
+
 /* Buttons */
 
-.btn-signup,
-.btn-edit,
-.btn-crispy {
+.btn-confirm,
+.btn-big {
     background-color: #457B9D;
     color: #fff;
     border: 1px solid #1d3557;
     font-weight: bold;
-}
-
-.btn-edit {
-    margin-bottom: 20px;
-}
-
-.btn-crispy {
-    margin: 20px auto;
+    margin: 10px auto 0;
 }
 
 .btn-reset {
@@ -260,22 +249,21 @@ fieldset {
     color: #fff;
     border: 1px solid #1d3557;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin: 10px auto 0;
 }
 
 .btn-big {
     font-size: 2rem;
-    margin-bottom: 40px;
+    margin: 0 auto 40px;
 }
 
-.btn-signup:hover,
-.btn-edit:hover,
-.btn-crispy:hover,
-.btn-signup:active,
-.btn-edit:active,
-.btn-crispy:active {
+.btn-confirm:hover,
+.btn-big:hover,
+.btn-confirm:active,
+.btn-big:active {
     background-color: #fff;
     color: #457B9D;
+    text-decoration: none ;
 }
 
 .btn-reset:hover,

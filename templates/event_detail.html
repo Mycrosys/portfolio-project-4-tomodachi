@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 mt-3 offset-md-2">
-            <p class="event-headline">Event Details</p>
+            <p class="page-headline">Event Details</p>
             <div class="text-main">
                 <p class="category-detail text-center {{ event.category_verbose }}">{{ event.category_verbose }}</p>
                 <!-- Event title -->
@@ -37,21 +37,21 @@
             <p class="text-center">
                 <!-- If the author is viewing the Event, offer Modify and Delete Button -->
                 {% if request.user == event.author %}
-                <a href="{% url 'edit_event' event.id %}" class="post-link">
-                    <span class="btn btn-edit">Modify Event</span>
+                <a href="{% url 'edit_event' event.id %}">
+                    <span class="btn btn-confirm">Modify Event</span>
                 </a>
-                <button type="button" class="btn btn-edit" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                <button type="button" class="btn btn-confirm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     Delete Event
                 </button>
                 
                 <!-- If someone that has not yet joined the Event is viewing, offer Join Event Button -->
                 {% elif request.user not in event.attendees.all and not request.user == event.author %}
-                <a href="{% url 'join_event' event.id %}" class="post-link">
-                    <span class="btn btn-edit">Join Event</span>
+                <a href="{% url 'join_event' event.id %}">
+                    <span class="btn btn-confirm">Join Event</span>
                 </a>
                 {% elif request.user in event.attendees.all and not request.user == event.author %}
-                <a href="{% url 'leave_event' event.id %}" class="post-link">
-                    <span class="btn btn-edit">Leave Event</span>
+                <a href="{% url 'leave_event' event.id %}">
+                    <span class="btn btn-confirm">Leave Event</span>
                 </a>
                 {% endif %}
             </p>
@@ -72,8 +72,8 @@
                 This action can not be reversed.
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-signup" data-bs-dismiss="modal">Cancel</button>
-                <button class="btn btn-signup" onclick="location.href='{% url 'delete_event' event.id %}';">
+                <button type="button" class="btn btn-confirm" data-bs-dismiss="modal">Cancel</button>
+                <button class="btn btn-confirm" onclick="location.href='{% url 'delete_event' event.id %}';">
                     Delete Event
                   </button>
             </div>

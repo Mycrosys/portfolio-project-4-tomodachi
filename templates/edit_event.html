@@ -7,7 +7,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 mt-1 offset-md-2">
-            <p class="event-headline">Modify Event</p>
+            <p class="page-headline">Modify Event</p>
             <div class="text-main">
                 <!-- Load Eventform from forms.py with crispyforms -->
                 <form method="POST">
@@ -16,7 +16,7 @@
                     <p>* Required</p>
                     <p>If you make any modifications, the Event start time needs to be at least 12 hours in the future.</p>
                     <div class="text-center">
-                        <input id="create-button" class="btn btn-edit" type="submit" value="Update Event">
+                        <input id="create-button" class="btn btn-confirm" type="submit" value="Update Event">
                         <button id="reset-button" class="btn btn-reset" type="reset">Reset</button>
                     </div>
                 </form>
@@ -24,6 +24,7 @@
         </div>
     </div>
 </div>
+<br>
 
 <!-- Load Script to update the min time for the Event starttime to now + 12 hours -->
 <script src="{% static 'js/formupdate.js' %}"></script>

@@ -52,19 +52,19 @@
         <p class="index-headline">Tomodachi lets you create and share Events and meet up with new people.</p>
         
         <div class="col-md-4 aboutsite">
-            <p class="aboutsite-headline"><i class="fa-solid fa-calendar-plus"></i> Create personal Events in seconds</p>
+            <p class="aboutsite-subheadline"><i class="fa-solid fa-calendar-plus"></i> Create personal Events in seconds</p>
             <img src="{% static 'img/two-women-in-front-of-pc.jpg' %}" class="d-block w-100" alt="Two women in front of their Laptops.">
             <p class="text-main">With just a few clicks you will be able to create your events and meetups. It takes no prior knowledge as long as you have all the information ready. Be it watching a movie, halo with the boys, or a girl's night out - Tomodachi can handle everything for you.</p>
         </div>
         
         <div class="col-md-4 aboutsite">
-            <p class="aboutsite-headline"><i class="fa-solid fa-link"></i> Share them with new friends</p>
+            <p class="aboutsite-subheadline"><i class="fa-solid fa-link"></i> Share them with new friends</p>
             <img src="{% static 'img/two-man-looking-at-phone.jpg' %}" class="d-block w-100" alt="Two man looking at one Smartphone Screen.">
             <p class="text-main">Once you have created your event, you can share it via a simple link with all your friends. Registered Users will be able to see all the details like the location of the meetup and join it, signaling their attendance.</p>
         </div>
         
         <div class="col-md-4 aboutsite">
-            <p class="aboutsite-headline"><i class="fa-solid fa-user-group"></i> Meet and have fun together</p>
+            <p class="aboutsite-subheadline"><i class="fa-solid fa-user-group"></i> Meet and have fun together</p>
             <img src="{% static 'img/big-event-at-night.jpg' %}" class="d-block w-100" alt="A big flashy Event happening outside at night.">
             <p class="text-main">Ever wanted to watch a movie but none of your friends had time? Don't want to go alone? It's easy to find new friends with Tomodachi and explore your hobbies together. Sign up today for free so you can get started!</p>
         </div>
@@ -72,7 +72,7 @@
 
     <!-- This shows upcoming Events, ordered by their time of taking place -->
     <div class="row">
-        <p class="upcoming-headline">Upcoming Events</p>
+        <p class="index-headline">Upcoming Events</p>
         
         <!-- Show the next 4 upcoming Events -->
         <div class="col-12 mt-3 left">
@@ -107,13 +107,13 @@
             </div>
         </div>
     </div>
-
+    <br>
     <!-- Signup Button on the Bottom in case you are not authenticated -->
     {% if not user.is_authenticated %}
     <div class="row">
         <div class="col-12 mt-3 text-center">
-            <a href="{% url 'account_signup' %}" class="post-link">
-                <span class="btn btn-edit btn-big">Sign up and start creating your own Events today!</span>
+            <a href="{% url 'account_signup' %}">
+                <span class="btn btn-big">Sign up and start creating your own Events today!</span>
             </a>
         </div>
     </div>
