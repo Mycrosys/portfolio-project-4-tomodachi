@@ -1,108 +1,137 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+<h1 align="center"><a name="top">Project Tomodachi</a></h1>
 
-Welcome Mycrosys,
+[View the live project here.](https://portfolio-project-4-tomodachi.herokuapp.com/)
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+Project Tomodachi is a Website that allows you to create Events and share them with other people. Authenticated users can create events, update them, delete them and join events created by other people.
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
+They are also able to browse all events available on the webpage to find one they like and want to take part in.
 
-## Gitpod Reminders
+<h2 align="center"><img src="./docs/images/tomodachi_website.jpg" alt="Project Tomodachi on multiple Devices"></h2>
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+<br>
 
-`python3 -m http.server`
+## <a name="tableofcontents">Table of Contents</a>
 
-A blue button should appear to click: _Make Public_,
+### I. [User Experience (UX)](#userxp)
+-   [Five Planes of UXD](#fiveplanes)
+-   [Design](#design)
+-   [User Stories](#userstories)
+-   [Wireframes](#wireframes)
 
-Another blue button should appear to click: _Open Browser_.
+### II. [The Model](#databasemodel)
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+### III. [Features](#features)
 
-A blue button should appear to click: _Make Public_,
+### IV. [Technologies Used](#technology)
 
-Another blue button should appear to click: _Open Browser_.
+### VI. [Testing](#testing)
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+### VII. [Limitations/Restrictions](#limitations)
 
-To log into the Heroku toolbelt CLI:
+### VIII. [Deployment](#deployment)
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+### IX. [Credits](#credits)
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+<br><br>
 
-------
 
-## Release History
+## ([^](#tableofcontents)) <a name="userxp">User Experience (UX)</a>
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+## <a name="userxp">User Experience (UX)]</a>
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+*   ### <a name="fiveplanes">Five Planes of UXD</a>
+    -   #### Strategy Plane
+        1. The Strategy for this Site is mostly Personal, mainly to pass the Portfolio 4 Project. I want to do this by creating a Website that lets multiple people create and share Events and meetups to better organize themselves. 
+        2. I've had this idea for a while now, mainly because I and my friends have been looking for something easier to organize than making calendar events and sending invitations that way. There are probably some apps out there that do the same thing, but I wanted my version which I can work on even after I finish the project.
+        3. Expandability: Frameworks give plenty of options to expand the idea in the future. This version is more of a starting point than the end of the journey.
+        
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+    -   #### Scope Plane
+        1. The Site covers Authentication and CRUD around the Events as well as flagging an event for attendance.
+        2. Actions done by the User like logging in or out will trigger Feedback Messages.
+        3. The same is true for creating, deleting, modifying, and joining/leaving an Event.
+        4. The Page 'My Events' is there to keep track of Events created by the User and Events he has joined so far as well as having easy access to deleting or modifying them.
+        5. 'Browse Event' is there to show created Events and filter them by category, if they are online/offline, and/or if the Title, Summary, or Location contains a certain text the User defines.
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+    -   #### Structure Plane
+        1. The Structure of the Site is simple and mostly linear. Progressing is mostly done with just the click of a Button unless form Inputs are required. The site visitor can always click on the navbar Elements to quickly find or create events. Only when watching event details or modifying an event, an additional step is needed.
+        2. There is a clear indication on the Navbar when you are on one of it mentioned Pages. The only exceptions are 'detail' and 'modify' event pages because these require a specific event ID. However, these are straightforward and the site visitor can return to the normal navigation simply by clicking on one of the navbar elements.
+    
+    -   #### Skeleton Plane
+        1. The [Wireframes](#wireframes) can be found further down in this Document.
+        2. The Home Page is presented with a carousel, alternating images, and some basic information that gets the visitor interested. Further down more images with more pieces of information are implemented, finishing with a small list of upcoming events and a signup Button (only visible if the Site visitor is not already logged in). The Home Page is also the only site that contains images, while the other sites focus on Information display only.
+        3. Events are implemented as Cards throughout the whole page, being introduced on the Home Page and then followed up in My Events and Browse.
+        4. Forms are used for creating and modifying events as well as Filtering them in the Browse section on the Page. Crispy forms are used to make them fit with the Design of the Site.
+        5. On mobile devices, the amount of content displayed next to each other changes to give users the chance to use the page with 100% functionality on these devices as well. The content is then ordered in a way he would normally consume the content on a Desktop Browser as well, to not cause confusion and keep it well structured. This is achieved by using Bootstrap 5.
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+    -   #### Surface Plane
+        1. Fontawesome was used for the navbar, footer links, and event cards to display if you are the creator of that event or have joined it. Comparable Icons are used on other sites so this should feel familiar to the visitor.
+        2. Further details like Font/Color choice, etc. can be found in the next separate Section: [Design](#design).
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+<br>
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+*   ### <a name="design">Design</a>
+  
+    -   #### Colour Scheme
+        -   I choose a blueish color palette with a flashy red for highlighting links that are not buttons. The Palette can be found [here](https://coolors.co/palette/e63946-f1faee-a8dadc-457b9d-1d3557). The Font Color used is mostly a darkish blue (#1D3557) while the background is not a clean white, but a variation of it (#F1FAEE). For the navbar, a light blue was my choice (#A8DADC) so that the contrast to both the Font Color as well as the Link Highlight Reddish color (#E63946) meets WCAG compliance. The Footer swaps the colors around, taking the Site's Font color as its background and the Background color as its font color.
+        -   To round up the color usage, the remaining blue color of the palette (#457B9D), which is between the dark blue of the font and the light blue of the navbar, is used for the buttons on the website, the only exception being the reset button on the webform for creating an event to have some visual distinction there.
+  
+    -   #### Typography
+        -   The Aleo font is used as the main font for the whole website with a serif as a backup font in case the font doesn't import correctly. It is also displayed in italic and bold, which makes it easy to read on all devices.
+        -   To complement this, Arimo is used as the main header font. Its main purpose is to support the site's theme. The backup font is sans-serif.
+  
+    -   #### Imagery
+        -   Only the Home Page contains any imagery. There is a big carousel showing multiple people taking part in events to associate the Site with the end goal of having fun together with other people. Further down the Homepage, we see 3 more images that show people creating and sharing an event, as well as one picture of a big event taking part at night with lots of lighting.
+        
+  
+<br>
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+*   ### <a name="userstories">User stories</a>
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+    -   #### First Time Visitor Goals
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+        1. As a First Time Visitor, I want to easily understand the main purpose of the site and what I can do with the tools given to me.
+        2. As a First Time Visitor, I want the site to have easily recognizable visualization and labeling that helps me get around it.
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+    -   #### Site User
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+        1. As a Site User, I can register an account so that I can create/join and view details of events.
+        2. As a registered Site User, I can create my events so that I can share them with other site users.
+        3. As a registered Site User, and Event Creator I can delete my existing events so that I can remove them from the website.
+        4. As a registered Site User, and Event Creator I can edit/modify my existing events so that I can update their information.
+        5. As a registered Site User, I can view and browse Events so that I can find out more information about them.
+        6. As a registered Site User, I can join events so that I can show other users I will attend these.
+        7. As a registered Site User, I can leave events I have joined before so that I can show other users I will no longer attend said event.
+        8. As a registered Site User, I can search for events so that I can find events I want to join.
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+    -   #### Site Admin
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+        1. As a Site Admin, I can create, read, update and delete events and their attendees so that I can manage the event site's content.
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+<br>
 
-------
-
-## FAQ about the uptime script
-
-**Why have you added this script?**
-
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
-
-**How will this affect me?**
-
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
-
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
-
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
-
-**So….?**
-
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
-
-**Can I opt out?**
-
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
-
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
-
-**Anything more?**
-
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
-
----
-
-Happy coding!
+*   ### <a name="wireframes">Wireframes</a>
+    -   Index Page Wireframe 1
+        <h2><img src="./docs/images/wireframe_index1.png" alt="Wireframe one of three for the first page the user is seeing when accessing the page on desktop devices"></h2><br>
+    -   Index Page Wireframe 2
+        <h2><img src="./docs/images/wireframe_index2.png" alt="Wireframe two of three for the first page the user is seeing when accessing the page on desktop devices"></h2><br>
+    -   Index Page Wireframe 3
+        <h2><img src="./docs/images/wireframe_index3.png" alt="Wireframe two of three for the first page the user is seeing when accessing the page on desktop devices"></h2><br>
+    -   Register Account Wireframe
+        <h2><img src="./docs/images/wireframe_sign_up.png" alt="Wireframe of the Sign up Page on desktop devices"></h2><br>
+    -   Sign In Wireframe
+        <h2><img src="./docs/images/wireframe_sign_in.png" alt="Wireframe of the Sign in Page on desktop devices"></h2><br>
+    -   Sign Out Wireframe
+        <h2><img src="./docs/images/wireframe_sign_out.png" alt="Wireframe of the Sign Out Page on desktop devices"></h2><br>
+    -   My Events Wireframe
+        <h2><img src="./docs/images/wireframe_my_events.png" alt="Wireframe of the My Events Page on desktop devices"></h2><br>
+    -   My Events Wireframe Mobile
+        <h2><img src="./docs/images/wireframe_my_events_mobile.png" alt="Wireframe of the My Events Page on mobile devices"></h2><br>
+    -   Delete Confirmation in My Events Wireframe
+        <h2><img src="./docs/images/wireframe_delete_confirm.png" alt="Wireframe of the Delete Confirmation on the My Events Page on desktop devices"></h2><br>
+    -   Create Event Wireframe
+        <h2><img src="./docs/images/wireframe_create_event.png" alt="Wireframe of the Create Event Page on desktop devices"></h2><br>
+    -   Browse Event Wireframe
+        <h2><img src="./docs/images/wireframe_browse_events.png" alt="Wireframe of the Browse Event Page on desktop devices"></h2><br>
+    
+<br><br>
