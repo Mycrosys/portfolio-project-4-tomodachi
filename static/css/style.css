@@ -287,3 +287,11 @@ fieldset {
     background-color: #1d3557;
     color: #f1faee;
 }
+
+.footer a {
+    color: #f1faee;
+}
+
+.footer a:hover {
+    color: #f1faee;
+}
