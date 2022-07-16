@@ -44,11 +44,11 @@ a {
 }
 
 .nav-link.active {
-    color: #e63946 !important;
+    color: #9F141F !important;
 }
 
 .nav-link:hover {
-    color: #e63946 !important;
+    color: #9F141F !important;
 }
 
 .user-display {
@@ -200,13 +200,13 @@ fieldset {
 /* Links */
 
 .link {
-    color: #e63946;
+    color: #9F141F;
     font-weight: bold;
 }
 
 .link:hover,
 .link:active {
-    color: #e63946;
+    color: #9F141F;
     text-decoration: underline;
 }
 
