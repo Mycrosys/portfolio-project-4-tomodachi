@@ -49,7 +49,7 @@ class BrowseForm(forms.Form):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_method = 'POST'
-        
+
         # Layout of the form
         self.helper.layout = Layout(
             'searchstring',

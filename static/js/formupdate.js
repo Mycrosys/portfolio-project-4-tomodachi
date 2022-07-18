@@ -20,10 +20,10 @@ document.addEventListener("DOMContentLoaded", function() {
     let year = future.getFullYear();
     
     // Hour
-    let hours = future.getHours()
+    let hours = future.getHours();
     
     // Minutes
-    let min = future.getMinutes()
+    let min = future.getMinutes();
 
     // If the numbers are less than 10, add a 0 before it
     // otherwise the date will not be in the right format
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Build the correct Datestring to inject as max value
     // into the Inpute Datetimefield
-    futurestring = year + '-' + month + '-' + day + 'T' + hours + ':' + min;
+    let futurestring = year + '-' + month + '-' + day + 'T' + hours + ':' + min;
     
     // The actual injection into the format field
     document.getElementById("id_location_time").setAttribute("min", futurestring);

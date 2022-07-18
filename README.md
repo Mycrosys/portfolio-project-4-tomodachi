@@ -89,25 +89,7 @@ They are also able to browse all events available on the webpage to find one the
 
 *   ### <a name="userstories">User stories</a>
 
-    -   #### First Time Visitor Goals
-
-        1. As a First Time Visitor, I want to easily understand the main purpose of the site and what I can do with the tools given to me.
-        2. As a First Time Visitor, I want the site to have easily recognizable visualization and labeling that helps me get around it.
-
-    -   #### Site User
-
-        1. As a Site User, I can register an account so that I can create/join and view details of events.
-        2. As a registered Site User, I can create my events so that I can share them with other site users.
-        3. As a registered Site User, and Event Creator I can delete my existing events so that I can remove them from the website.
-        4. As a registered Site User, and Event Creator I can edit/modify my existing events so that I can update their information.
-        5. As a registered Site User, I can view and browse Events so that I can find out more information about them.
-        6. As a registered Site User, I can join events so that I can show that I will attend these.
-        7. As a registered Site User, I can leave events I have joined before so that I can show that I will no longer attend said event.
-        8. As a registered Site User, I can search for events so that I can find events I want to join.
-
-    -   #### Site Admin
-
-        1. As a Site Admin, I can create, read, update and delete events and their attendees so that I can manage the event site's content.
+    - User Stories have been created in the Github Project and can be found [here](https://github.com/Mycrosys/portfolio-project-4-tomodachi/issues?q=is%3Aissue).
 
 <br>
 
@@ -266,11 +248,76 @@ Confirmation message after modifying an event.<br>
     - For validating the JS Code
 1. [PEP8](http://pep8online.com/)
     - For validating the Python code
+1. [a11y](https://color.a11y.com/Contrast/)
+    - For validating contrast of colors used on the Website
 
 <br>
 
 ## ([^](#tableofcontents)) <a name="testing">Testing</a>
 
+### General Testing
+
+1. The W3C Markup Validator and W3C CSS Validator Services were used to validate every page of the project to ensure there were no syntax errors in the project.
+    - [W3C Markup Validator](https://validator.w3.org/#validate_by_input) - [Results](https://validator.w3.org/nu/?doc=https%3A%2F%2Fportfolio-project-4-tomodachi.herokuapp.com%2F)
+    - Because most of the Websites Content was not available to test because it required validation, the Site Code (browser -> show source code)was instead put into the Markup Validator to confirm every site runs through it without error. No errors have been found and all Pages returned the same result as the home page.
+    - [W3C CSS Validator](https://jigsaw.w3.org/css-validator/#validate_by_input) - [Results](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fres.cloudinary.com%2Fmkiesel-cloudinary%2Fraw%2Fupload%2Fv1%2Fstatic%2Fcss%2Fstyle.effe9a6f455e.css&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=de)
+
+2. The JSHINT Validator was used to validate the Javascript used on the place. There is only a single function used for setting the min Date in the create and modify event form. The 8 Warnings all relate to jshint settings ('let' is available in ES6 (use 'esversion: 6') or Mozilla JS extensions (use moz).) and can be safely ignored. All scripts not contained in that Javascript file were related to the carousel or messages and have been taken from the [Bootstrap 5 Documentation](https://getbootstrap.com/docs/5.0/getting-started/introduction/).
+<h2><img src="./docs/images/jshint.jpg" alt="A Picture of the JSHINT Validation and its results"></h2><br>
+
+3. PEP8 was used for the validation of the Python code. This is a huge part of the Project, spanning hundreds of lines, mostly in the automated tests and views.py, but all Python files were checked. There was no error reported in any of them.
+<h2><img src="./docs/images/pep8.jpg" alt="A Picture of the Pep8 Validation and its results"></h2><br>
+
+4. Contrast and WCAG: [a11y](https://color.a11y.com/Contrast/) was used to check for WCAG compliance to maximize Accessibility.
+<h2><img src="./docs/images/a11y.jpg" alt="A Picture of the a11y Validation and its results"></h2><br>    
+
+5. Resolution and Scaling were tested with Google Dev tools down to the lowest width device (Galaxy Fold, 280px) to ensure the website works flawlessly on all resolutions 280px and above.
+
+6. The Website was viewed on the following Devices:
+    - Windows 10 PC
+    - Google Pixel 6
+    - Apple Ipad
+
+Both the Pixel 6 displayed the site perfectly in normal and Landscape mode on Google Chrome. In addition, the Website was viewed on PC on Google Chrome, Mozilla Firefox, Opera Brave, and Microsoft Edge. The site looked and worked great on all Devices and all Browsers Used.
+<br>
+
+### Google Lighthouse Testing
+
+1. Results
+- Desktop of Index Page:
+  <h2><img src="./docs/images/lighthouse_desktop_index.jpg" alt="Results of Google Lighthouse test of Index Page for Desktop devices"></h2><br>
+- Mobile of Index Page:
+  <h2><img src="./docs/images/lighthouse_mobile_index.jpg" alt="Results of Google Lighthouse test of Index Page for Mobile devices"></h2><br>
+- Desktop of My Events Page:
+  <h2><img src="./docs/images/lighthouse_desktop_myevents.jpg" alt="Results of Google Lighthouse test of My Events Page for Desktop devices"></h2><br>
+- Mobile of My Events Page:
+  <h2><img src="./docs/images/lighthouse_mobile_myevents.jpg" alt="Results of Google Lighthouse test of My Events Page for Desktop devices"></h2><br>
+- Performance for the Index Page is low, due to its use of lots of Pictures. Performance is also decreased due to the use of lots of libraries, so not much can be done here. Even though the Performance here seems rough, especially on Mobile Devices, all Pictures combined amount to less than 1.5MB of Data, which should be manageable. The Performance also relies on how fast everything is served, and we are making use of Cloud Services for media and CDNs for libraries. Performance does however improve on the other pages, due to the lack of imagery hosted there (only the index site has any images at all). I choose the results of the My Events Page, because that is the Page where the most happen usually, the other pages receive similar results, however, with 1-2 points of margin.
+- Accessibility and SEO receive perfect Marks on all Pages
+- Best Practices receive a 92 on all Pages, with an Issue related to cookies and cloudinary being mentioned as the reason.
+  <h2><img src="./docs/images/best_practices.jpg" alt="Picture of the Issues with Best Practices from Google Lighthouse"></h2><br>
+
+<br>
+
+### Automated Testing (Django Testcase)
+
+1. A total of 39 automatic tests were written to test the Forms, the Model, and the Views extensively. The Tests are as follows:
+    - 9 Tests, checking if the Page is loading and the correct template is used
+    - 2 Tests, if the Filter on the Browse Page returns the correct events
+    - 3 Test, if you can modify an event (one as author, one as not being the author, and one with an invalid submission)
+    - 2 Tests, if you can delete an event (one as author, and one with not being the author)
+    - 2 Tests, if you can create an event (one with a valid submission and one with an invalid submission)
+    - 2 Tests, if you can join an event (one with already being an attendee and one with previously not being one)
+    - 2 Tests, if you can leave an event (one with being an attendee, one with not being a current attendee)
+    - 1 Test, with checking if location_online in the model defaults to False
+    - 1 Test, with checking if the string method in the model returns the title
+    - 6 Tests, if specific Fields in a Form are required
+    - 8 Tests, if specific Fields in a Form are not required
+    - 1 Test, if the Form Fields in the Metaclass are explicit
+2. The Tests are run by typing "python3 manage.py test" in the Terminal.
+3. Results: <h2><img src="./docs/images/automatic_tests_results.jpg" alt="Picture of the Results of automatic Tests in Django"></h2>
+4. Coverage: <h2><img src="./docs/images/automatic_tests_coverage.jpg" alt="Picture of the Coverage of automatic Tests in Django"></h2>
+The remaining 2% is code that will never happen but has been implemented for best practice to catch invalid submissions like in all views. The submission in this specific case however has been coded to always create a valid result, so this code can not be covered with automatic testing.
 
 
 <br>
