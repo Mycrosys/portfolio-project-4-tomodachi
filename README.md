@@ -2,7 +2,7 @@
 
 [View the live project here.](https://portfolio-project-4-tomodachi.herokuapp.com/)
 
-Project Tomodachi is a Website that allows you to create Events and share them with other people. Authenticated users can create events, update them, delete them and join events created by other people.
+Project Tomodachi (Tomodachi is the Japanese Word for Friend) is a Website that allows you to create Events and share them with other people. Authenticated users can create events, update them, delete them and join events created by other people. It supports online Events, such as Watchparties or Onlinegames, as well as ones where physical attendance is required. By sharing these events on the Tomodachi Plattform, Site Users can find new people to enjoy these events together, find new interests, or jump right into their next adventure.
 
 They are also able to browse all events available on the webpage to find one they like and want to take part in.
 
@@ -16,6 +16,7 @@ They are also able to browse all events available on the webpage to find one the
 -   [Five Planes of UXD](#fiveplanes)
 -   [Design](#design)
 -   [User Stories](#userstories)
+-   [Agile Methodology](#agile)
 -   [Wireframes](#wireframes)
 
 ### II. [The Model](#databasemodel)
@@ -39,9 +40,10 @@ They are also able to browse all events available on the webpage to find one the
 
 *   ### <a name="fiveplanes">Five Planes of UXD</a>
     -   #### Strategy Plane
-        1. The Strategy for this Site is mostly Personal, mainly to pass the Portfolio 4 Project. I want to do this by creating a Website that lets multiple people create and share Events and meetups to better organize themselves. 
-        2. I've had this idea for a while now, mainly because I and my friends have been looking for something easier to organize than making calendar events and sending invitations that way. There are probably some apps out there that do the same thing, but I wanted my version which I can work on even after I finish the project.
-        3. Expandability: Frameworks give plenty of options to expand the idea in the future. This version is more of a starting point than the end of the journey.
+        1. During covid-19, many people suddenly couldn't go out anymore and enjoy events. During these times many either used new tools to keep connected (for example with Zoom) or went back to some old hobbies they neglected in the past due to social duties that were suspended during the pandemic. I wanted to create a site to find people for fun things to do together, be it online or offline.
+        2. I've had this idea for a while now, mainly because I and my friends have been looking for something easier to organize than making calendar events and sending invitations that way. It's hard to find people outside your friend group and we often seem to be one person short for playing a board game, playing some Pen&Paper RPGs, or playing some street soccer.
+        3. There are big communities out there on pages like Reddit, but if you just want to have fun and quickly create an event and have others join in, there isn't a really quick way to do it. I don't expect this tool to be used in a worldwide environment, at least not the offline part of it. Instead, having this being used by a small town or a school is very viable.
+        4. Expandability: Frameworks give plenty of options to expand the idea in the future. This version is more of a starting point than the end of the journey.
         
 
     -   #### Scope Plane
@@ -72,7 +74,7 @@ They are also able to browse all events available on the webpage to find one the
   
     -   #### Colour Scheme
         -   I choose a blueish color palette with a flashy red for highlighting links that are not buttons. The Palette can be found [here](https://coolors.co/9f141f-f1faee-a8dadc-457b9d-1d3557). The Font Color used is a Prussian Blue (#1D3557) while the background is not a clean white, but a variation of it called Honeydew (#F1FAEE). For the navbar, Powder Blue was my choice (#A8DADC) so that the contrast to both the Font Color as well as the Link Highlight in Ruby Red (#9F141F) meets WCAG compliance. The Footer swaps the colors around, taking the Site's Font color as its background and the Background color as its font color.
-        -   To round up the color usage, the remaining blue color of the palette is a Celadon Blue (#457B9D), which is between the Prussian Blue of the font and the Powder Blue of the navbar, is used for the buttons on the website, the only exception being the reset button on the webform for creating an event to have some visual distinction there.
+        -   To round up the color usage, the remaining blue color of the palette is Celadon Blue (#457B9D), which is between the Prussian Blue of the font and the Powder Blue of the navbar, and is used for the buttons on the website, the only exception being the reset button on the webform for creating an event to have some visual distinction there.
     
     <br>
     <h2><img src="./docs/images/palette.jpg" alt="A Picture of the color Palette used on the website"></h2><br>
@@ -89,7 +91,29 @@ They are also able to browse all events available on the webpage to find one the
 
 *   ### <a name="userstories">User stories</a>
 
-    - User Stories have been created in the Github Project and can be found [here](https://github.com/Mycrosys/portfolio-project-4-tomodachi/issues?q=is%3Aissue).
+    -   #### Site User
+
+        1. As a Site User, I can register an account so that I can create/join and view details of events.
+        2. As a registered Site User, I can create my events so that I can share them with other site users.
+        3. As a registered Site User, and Event Creator I can delete my existing events so that I can remove them from the website.
+        4. As a registered Site User, and Event Creator I can edit/modify my existing events so that I can update their information.
+        5. As a registered Site User, I can view and browse Events so that I can find out more information about them.
+        6. As a registered Site User, I can join events so that I can show other users I will attend these.
+        7. As a registered Site User, I can leave events I have joined before so that I can show other users I will no longer attend said event.
+        8. As a registered Site User, I can search for events so that I can find events I want to join.
+        9. As a registered Site User, I can see the Username I am logged in with so that I know that I am logged in with the correct Username.
+        10. As a registered Site User, I can quickly and easily distinguish Events I have created or joined in a list so that I can more easily find new events I am not involved with yet.
+        11. As a registered Site User, I can see Feedback Messages about my Actions so that I receive a visual confirmation, that my action was successful.
+
+    -   #### Site Admin
+
+        1. As a Site Admin, I can create, read, update and delete events and their attendees so that I can manage the event site's content.
+
+<br>
+
+*   ### <a name="agile">Agile Methodology</a>
+
+    - Development of this project was managed using GitHub Projects which can be found [here](https://github.com/Mycrosys/portfolio-project-4-tomodachi/issues?q=is%3Aissue).
 
 <br>
 
@@ -120,7 +144,7 @@ They are also able to browse all events available on the webpage to find one the
 <br><br>
 
 
-## ([^](#tableofcontents)) <a name="databasemodel">The Database Model</a>
+## ([^](#tableofcontents)) <a name="databasemodel">The Event Database Model</a>
 
 <h2><img src="./docs/images/database_model.jpg" alt="A Picture of the Database Model used in the Project"></h2><br>
 
@@ -146,9 +170,9 @@ They are also able to browse all events available on the webpage to find one the
 
 - Allauth handles all Authentication on the Website. Most of the Pages (details, my events, create/modify events, browse) require the User to be authenticated to work. If the User is not Authenticated, many elements of the Website aren't available, e.g. the Navbar does not even show some Pages, to begin with. If a User however uses a valid link to enter one of these pages, he will be met with a message telling him that he needs to be logged in and redirected to the home page a couple of seconds later. On the other side, if a user is authenticated, other elements are not shown. For example, neither the Login nor Register button is available, but instead, a logout option, as well as the username, is displayed. Likewise, the signup button on the bottom of the index page vanishes, if the user is logged in.
 
-The Navbar with a logged in User.
+The Navbar with a logged-in User.
 <h2><img src="./docs/images/navbar_logged_in.jpg" alt="A Picture of the Website showing the message that you need to be logged in to view that Page"></h2><br>
-Message telling you to log in or register.
+The message telling you to log in or register.
 <h2><img src="./docs/images/not_logged_in.jpg" alt="A Picture of the Website showing the message that you need to be logged in to view that Page"></h2><br>
 
 ###   Color Coded display of Events, Information Icons
@@ -249,7 +273,7 @@ Confirmation message after modifying an event.<br>
 1. [PEP8](http://pep8online.com/)
     - For validating the Python code
 1. [a11y](https://color.a11y.com/Contrast/)
-    - For validating contrast of colors used on the Website
+    - For validating the contrast of colors used on the Website
 
 <br>
 
@@ -293,9 +317,7 @@ Both the Pixel 6 displayed the site perfectly in normal and Landscape mode on Go
 - Mobile of My Events Page:
   <h2><img src="./docs/images/lighthouse_mobile_myevents.jpg" alt="Results of Google Lighthouse test of My Events Page for Desktop devices"></h2><br>
 - Performance for the Index Page is low, due to its use of lots of Pictures. Performance is also decreased due to the use of lots of libraries, so not much can be done here. Even though the Performance here seems rough, especially on Mobile Devices, all Pictures combined amount to less than 1.5MB of Data, which should be manageable. The Performance also relies on how fast everything is served, and we are making use of Cloud Services for media and CDNs for libraries. Performance does however improve on the other pages, due to the lack of imagery hosted there (only the index site has any images at all). I choose the results of the My Events Page, because that is the Page where the most happen usually, the other pages receive similar results, however, with 1-2 points of margin.
-- Accessibility and SEO receive perfect Marks on all Pages
-- Best Practices receive a 92 on all Pages, with an Issue related to cookies and cloudinary being mentioned as the reason.
-  <h2><img src="./docs/images/best_practices.jpg" alt="Picture of the Issues with Best Practices from Google Lighthouse"></h2><br>
+- Accessibility and SEO receive perfect Marks on all Pages, while Best Practices remain at 92.
 
 <br>
 
@@ -319,8 +341,14 @@ Both the Pixel 6 displayed the site perfectly in normal and Landscape mode on Go
 4. Coverage: <h2><img src="./docs/images/automatic_tests_coverage.jpg" alt="Picture of the Coverage of automatic Tests in Django"></h2>
 The remaining 2% is code that will never happen but has been implemented for best practice to catch invalid submissions like in all views. The submission in this specific case however has been coded to always create a valid result, so this code can not be covered with automatic testing.
 
-
 <br>
+
+### Known Issues
+- Best Practices receives a 92 on all Pages in Google Lighthouse Testing, with an Issue related to cookies and cloudinary being mentioned as the reason. This is related to the service itself and not my code. It is therefore out of my hands to fix this issue and improve this score.
+  <h2><img src="./docs/images/best_practices.jpg" alt="Picture of the Issues with Best Practices from Google Lighthouse"></h2><br>
+- The Issue doesn't actually show up in the Issues Panel at all. The only thing visible is a warning related to navigator.userAgent.
+  <h2><img src="./docs/images/warning.jpg" alt="Picture of the warning in the Issues Panel"></h2>
+<br><br>
 
 ## ([^](#tableofcontents)) <a name="deployment">Deployment</a>
 
