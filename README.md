@@ -24,13 +24,11 @@ They are also able to browse all events available on the webpage to find one the
 
 ### IV. [Technologies Used](#technology)
 
-### VI. [Testing](#testing)
+### V. [Testing](#testing)
 
-### VII. [Limitations/Restrictions](#limitations)
+### VI. [Deployment](#deployment)
 
-### VIII. [Deployment](#deployment)
-
-### IX. [Credits](#credits)
+### VII. [Credits](#credits)
 
 <br><br>
 
@@ -103,8 +101,8 @@ They are also able to browse all events available on the webpage to find one the
         3. As a registered Site User, and Event Creator I can delete my existing events so that I can remove them from the website.
         4. As a registered Site User, and Event Creator I can edit/modify my existing events so that I can update their information.
         5. As a registered Site User, I can view and browse Events so that I can find out more information about them.
-        6. As a registered Site User, I can join events so that I can show other users I will attend these.
-        7. As a registered Site User, I can leave events I have joined before so that I can show other users I will no longer attend said event.
+        6. As a registered Site User, I can join events so that I can show that I will attend these.
+        7. As a registered Site User, I can leave events I have joined before so that I can show that I will no longer attend said event.
         8. As a registered Site User, I can search for events so that I can find events I want to join.
 
     -   #### Site Admin
@@ -138,3 +136,232 @@ They are also able to browse all events available on the webpage to find one the
         <h2><img src="./docs/images/wireframe_browse_events.png" alt="Wireframe of the Browse Event Page on desktop devices"></h2><br>
     
 <br><br>
+
+
+## ([^](#tableofcontents)) <a name="databasemodel">The Database Model</a>
+
+<h2><img src="./docs/images/database_model.jpg" alt="A Picture of the Database Model used in the Project"></h2><br>
+
+- I decided on a simple Model for my first project to get it started. Allauth handles all Authentication Issues while my Event Model contains all relevant information about an event.
+
+- Title, Summary, and Location_Area are Charfield/Textfields and are the most important Fields for a User to describe their Event. The Title will be visible on all cards throughout the Webpage, while the Summary and Location_Area can only be viewed on the Details Page. The summary contains the main event Description while Location_Area contains the meetup place, which can either be a physical address, or a link to another website, video service, or tool used.
+
+- Location_Online tracks if the Event is an Offline Event (False), with people having to physically attend said event, or an Online Event (True), in which case people meet up on websites, voice, or video services, and the like. This is also only shown on the Detail Page, however, people can filter these Events on the Browse Page if they are looking specifically for one or the other.
+
+- Created_On, Modified_On, and Location_Time are DateTimeFields. While Created on automatically tracks the creation time of the event, Modified_On tracks the time of the last modification. Both of them are only visible on the Details Page. Location_Time however is visible in all cards, because it tracks the time the event is taking place and is the most important information out of the three in most cases.
+
+- Category tracks the category of the Event. There are currently 5 Possible categories: DIN (Dining), CIN (Cinema), GAM (Gaming), SPO (Sports), and CAM (Camping). For this first version of the Page, these categories are Hardcoded and limited to five, however, this is a place to further improve on the project, having a separate category model that lets the admin add new categories on the fly in another iteration of the Development cycle. The category is a piece of very important information for a Site User and every Card immediately shows its Category with a color Coded Background at the top of it.
+
+- Author and Attendees track the Creator of the Event as well as the people that have joined it, confirming their attendance. The Author is shown on the Details Page, while the number of attendees is shown on every card, to see how popular a said event is. The Usernames of the people that joined are not shown anywhere on the normal page. Only the Admin will have access to this information on the admin panel due to possible privacy concerns. We don't want people to be stalked, so I limited the display for the moment. A future iteration may introduce both the display of users to the event creator, as well as granting the event creator the right to remove Attendees from their event.
+
+- An earlier version used a slug, created from the title, but that was proven as being not effective because titles are probably being reused a lot in this scenario. Instead, the Event ID is now being used to link up pages.
+
+<br><br>
+
+## ([^](#tableofcontents)) <a name="features">Features</a>
+
+###   Authentication
+
+- Allauth handles all Authentication on the Website. Most of the Pages (details, my events, create/modify events, browse) require the User to be authenticated to work. If the User is not Authenticated, many elements of the Website aren't available, e.g. the Navbar does not even show some Pages, to begin with. If a User however uses a valid link to enter one of these pages, he will be met with a message telling him that he needs to be logged in and redirected to the home page a couple of seconds later. On the other side, if a user is authenticated, other elements are not shown. For example, neither the Login nor Register button is available, but instead, a logout option, as well as the username, is displayed. Likewise, the signup button on the bottom of the index page vanishes, if the user is logged in.
+
+The Navbar with a logged in User.
+<h2><img src="./docs/images/navbar_logged_in.jpg" alt="A Picture of the Website showing the message that you need to be logged in to view that Page"></h2><br>
+Message telling you to log in or register.
+<h2><img src="./docs/images/not_logged_in.jpg" alt="A Picture of the Website showing the message that you need to be logged in to view that Page"></h2><br>
+
+###   Color Coded display of Events, Information Icons
+
+- Events are shown as Cards on the Website, with their Category having a unique background color to make it immediately recognizable which kind of Event the Site User is looking at. In addition, as a logged-in User, these cards do contain symbols showing if you are the creator of the event (A Calendar Icon will appear) or have confirmed your attendance for that Event already (A checkmark Icon will be shown). Both are implemented via Fontawesome.
+
+<h2><img src="./docs/images/cards.jpg" alt="A Picture of the Events displayed as Cards on the Page"></h2><br>
+
+###   Event Creation/Modification and Deletion
+
+- Registered Site Users can create their own events as well as modify or delete them. For easier access to created events, my events page exists, showing all events that the user created and have not already taken place (expired events are not shown anywhere on the page). In case of a deletion of an Event, a confirmation modal is being shown that asks for confirmation. Deleting an Event has non-reversible repercussions because while you may be able to create the event again, all attendees need to join that new event again by themselves. If you want your Event to keep its attendees, modifying instead of deleting and recreating it is recommended.
+
+<h2><img src="./docs/images/delete_confirm_modal.jpg" alt="A Picture of a Modal asking to confirm the deletion of an event"></h2><br>
+
+- Event Creation and Modification are limited to give people time to adjust to attend or adjust to the changes. An event needs to be created at least 12 hours before it is taking place. The same holds true if you want to modify an event. In case the starting time is closer than 12 hours, you will be prompted to update the Location_Time when modifying your event.
+
+<h2><img src="./docs/images/time_limit_form.jpg" alt="A Picture of a Form Feedback Message that the Event needs to start at a later date"></h2><br>
+
+###   Joining or Leaving Events and tracking of Attendees
+
+- Registered Site Users are able to show their attendance by joining an Event. They can also leave it at any time, with no restrictions set in place. At this time, their name will not be visible to anyone except the admin in the admin panel for privacy reasons. This may change in future iterations of the project to give more control to the Event creator to manage the attendees.
+
+- Event Creators can not join or leave their created events. Their attendance is required and they are added as an attendee upon creation of the event. In order for them to leave their event, they will need to delete it completely. This is so Event Creators take ownership of their events and not create them and let attendees handle everything around them.
+
+<h2><img src="./docs/images/my_events.jpg" alt="A Picture of the my events page showing created and joined events"></h2><br>
+
+###   Visual Feedback to User Actions
+
+- The Site gives Users visual Feedback on where they are and if their mouse is over a link that will cause an action like submitting a form, resetting it, filtering events, or changing the site they currently are on. In addition, actions like logging in, logging out, deleting/modifying an event or joining, or leaving it, will create a feedback message that will be shown for a couple of seconds on top of the screen.
+
+Hovering over the Delete Button with the mouse.<br>
+<h2><img src="./docs/images/hovering_button.jpg" alt="A Picture of a car on the my events page hovering over the delete button"></h2><br>
+Hovering over the Browse Navbar Link with the mouse while on the My Events Page.<br>
+<h2><img src="./docs/images/hovering_navbar.jpg" alt="A Picture of the navbar the my events page, hovering over browse"></h2><br>
+Confirmation message after modifying an event.<br>
+<h2><img src="./docs/images/messages.jpg" alt="A Picture of the my events page showing a confirmation message for modifying an event"></h2><br>
+<br>
+
+## ([^](#tableofcontents)) <a name="technology">Technologies Used</a>
+
+### Languages Used
+
+-   [HTML 5](https://en.wikipedia.org/wiki/HTML/)
+-   [CSS 3](https://en.wikipedia.org/wiki/CSS)
+-   [JavaScript](https://de.wikipedia.org/wiki/JavaScript)
+-   [Python](https://en.wikipedia.org/wiki/Python_(programming_language))
+-   [Django](https://de.wikipedia.org/wiki/Django_(Framework))
+
+### Django Packages Used
+
+1. [Dj_database_url](https://pypi.org/project/dj-database-url/)
+    - For parsing the URL from env.py
+1. [Psycopg2](https://pypi.org/project/psycopg2/)
+    - As a PostgreSQL database adapter for the Python
+1. [Gunicorn](https://gunicorn.org/)
+    - As the Heroku Server
+1. [Allauth](https://django-allauth.readthedocs.io/en/latest/installation.html)
+    - For Authentication (Signup, Login, Logout)
+1. [Summernote](https://summernote.org/)
+    - For the Filtering and WYSIWYG Editor in the Admin Panel
+1. [Cloudinary](https://cloudinary.com/)
+    - As a host for static and media files
+1. [Crispy Forms](https://django-crispy-forms.readthedocs.io/en/latest/)
+    - For styling login, register, create an event, modify an event and browse filter forms
+
+### Frameworks, Libraries & Programs Used
+
+1. [Code Institute Basic Template:](https://github.com/Code-Institute-Org/gitpod-full-template)
+    - This Template was used as a requirement for this Project.
+1. [Git](https://git-scm.com/)
+    - Git was used for version control by utilizing the Gitpod terminal to commit to Git and Push to GitHub.
+1. [GitHub:](https://github.com/)
+    - GitHub is used to store the project's code after being pushed from Git.
+1. [Google Fonts:](https://fonts.google.com/)
+    - Google fonts were used to import the 'Aleo' and 'Arimo' fonts into the style.css file.
+1. [Font Awesome:](https://fontawesome.com/)
+    - Font Awesome was used to add icons for aesthetic and UX purposes.
+1. [Bootstrap](https://getbootstrap.com/)
+    - Used to make the Website responsive and style it.
+1. [Jquery](https://jquery.com/)
+    - To help with Javascript
+1. [Heroku](https://www.heroku.com/)
+    - For deployment of the Project
+1. [PostgreSQL](https://www.postgresql.org/)
+    - As the Database used for the project.
+1. [Balsamiq](https://balsamiq.com/)
+    - Balsamiq was used to create [Wireframes](#wireframes) for the project.
+1. [Gimp:](https://www.gimp.org/)
+    - Gimp was used to create, modify and resize all images on this website.
+1. [Favicon Generator](https://favicon.io/favicon-generator/)
+    - Favicon Generator was used to create the Favicon for the project.
+1. [W3C - HTML](https://validator.w3.org/)
+    - For validating the HTML code
+1. [W3C - CSS](https://jigsaw.w3.org/css-validator/)
+    - For validating the CSS Code
+1. [JSHINT - JS](https://jshint.com/)
+    - For validating the JS Code
+1. [PEP8](http://pep8online.com/)
+    - For validating the Python code
+
+<br>
+
+## ([^](#tableofcontents)) <a name="testing">Testing</a>
+
+
+
+<br>
+
+## ([^](#tableofcontents)) <a name="deployment">Deployment</a>
+
+
+## Creating a Django app
+
+1. You will need to use the Code Institute Gitpod Full Template [Template](https://github.com/Code-Institute-Org/gitpod-full-template)
+1. Click on the "Use This Template" Button, and once it is in your repository, click on Gitpod and way for the image to be finished.
+1. Open a Terminal and install Django and gunicorn with "pip3 install 'django<4' gunicorn".
+1. Then install the database libraries with "pip3 install dj_database_url psycopg2".
+1. Next, create the requirements.txt with "pip2 freeze --local > requirements.txt".
+1. You can then create the project with "django-admin startproject projectname" and create the app with "python3 manage.py startapp appname".
+1. Add your created app to the list of installed apps in settings.py.
+1. Migrate your changes with "python3 manage.py migrate", then Start your Server with "python3 manage.py runserver" and check if everything runs fine.
+1. You should now see the basic deployment welcome page of Django.
+
+## Deployment on Heroku
+
+1. Log in to [Heroku](https://www.heroku.com)
+1. When you see your Dashboard, click on "New" and select "Create New App"
+1. Enter the App name and select your region then click on "Create App"
+1. Click on "Resources" and add the Heroku Postgres database to your App
+1. Next, click on "Settings" in the Top Nav and scroll down to "Config Vars". Click on "Reveal Config Vars"
+1. Add the following Variables. "Port" with a value of "8000", "DISABLE_COLLECTSTATIC" with a value of "1" as well as the variables "SECRET_KEY", and "CLOUDINARY_URL" with the values matching your settings.py file. For that matter, it is important, that the DATABASE_URL in your Heroku Config Vars matches the one in your settings.py as well.
+1. On the same page, scroll further down to "Buildpacks". Click on "Add buildpack" and add Python to it. Confirm by clicking "Save changes".
+1. On the Top Nav now select "Deploy". Select Github as the deployment option and connect to your Github repository. Search for your repository name and click on the "connect" button.
+1. At the bottom of the page, you will be able to choose between automatic and manual deployment. Choose your preferred method.
+
+## Finalizing Deployment 
+
+1. Create a Procfile with one line of content: "web: gunicorn project_name.wsgi".
+1. Once your development is finished, go to the settings.py and change "DEBUG = TRUE" to "DEBUG = FALSE"
+1. Add the following line of code to the same file: "X_FRAME_OPTIONS = SAMEORIGIN"
+1. You can then delete the Config Var "DISABLE_COLLECTSTATIC = 1" in your Heroku App and push/deploy the final code.
+
+### Forking the GitHub Repository
+
+- By forking the GitHub Repository we make a copy of the original repository on our GitHub account to view and/or make changes without affecting the original repository by using the following steps:
+
+1. Log in to GitHub and locate the [GitHub Repository](https://github.com/Mycrosys/portfolio-project-4-tomodachi)
+1. At the top of the Repository (not top of the page) just above the "Settings" button on the menu, locate the "Fork" button.
+1. You should now have a copy of the original repository in your GitHub account.
+
+### Making a Local Clone
+
+1. Log in to GitHub and locate the [GitHub Repository](https://github.com/Mycrosys/portfolio-project-4-tomodachi)
+1. Under the repository name, click "Clone or download".
+1. To clone the repository using HTTPS, under "Clone with HTTPS", copy the link.
+1. Open Git Bash
+1. Change the current working directory to the location where you want the cloned directory to be made.
+1. Type "git clone", and then paste the URL you copied in Step 3.
+1. Press Enter. Your local clone will be created.
+
+Click [Here](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository#cloning-a-repository-to-github-desktop) to retrieve pictures for some of the buttons and more detailed explanations of the above process.
+
+<br>
+
+## ([^](#tableofcontents)) <a name="credits">Credits</a>
+
+### Framework
+
+- The Template that was used in creating the Project belongs to [Code Institute](https://codeinstitute.net/global/) and can be found [here](https://github.com/Code-Institute-Org/gitpod-full-template).
+
+### Readme
+
+-   The Basic Structure of the Readme was taken from [Code Institute's Sample Readme](https://github.com/Code-Institute-Solutions/SampleREADME/blob/master/README.md).
+
+### Media
+
+- All Images used in this Project come from [pexels](https://www.pexels.com/) and are royalty-free.
+
+- The [Carousel Cinema Image](https://www.pexels.com/photo/people-sitting-on-red-chairs-7991158/) was created by [Tima Miroshnichenko](https://www.pexels.com/@tima-miroshnichenko/).
+
+- The [Carousel Gaming Image](https://www.pexels.com/photo/3-women-and-2-men-sitting-on-couch-8885104/) was created by [MART PRODUCTION](https://www.pexels.com/@mart-production/).
+
+- The [Carousel Camping Image](https://www.pexels.com/photo/two-women-sitting-on-ground-near-bonfire-344102/) was created by [Oleksandr Pidvalnyi](https://www.pexels.com/@freestockpro/).
+
+- The [Create Personal Events Image](https://www.pexels.com/photo/two-women-holding-laptop-1181273/) was created by [Christina Morillo](https://www.pexels.com/@divinetechygirl/).
+
+- The [Share Events Image](https://www.pexels.com/photo/cheerful-black-man-showing-video-on-mobile-phone-to-friend-6140963/) was created by [William Fortunato](https://www.pexels.com/@william-fortunato/).
+
+- The [Meet Events Image](https://www.pexels.com/photo/people-inside-concert-hall-2263436/) was created by [Teddy Yang](https://www.pexels.com/@teddy/).
+
+- The Sites Favicon next to the Websites Name in the Tab was created with the [Favicon Generator](https://favicon.io/favicon-generator/).
+
+
+### Acknowledgments
+
+-   My Mentor for continuous helpful feedback.
+-   Tutor Support for their help. Guys, you helped me big time in this project - many, many thanks to all of you. You're awesome!
+-   My Peers in Code Institute's Slack channel for their feedback.
