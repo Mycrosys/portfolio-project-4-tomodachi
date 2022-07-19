@@ -27,9 +27,11 @@ They are also able to browse all events available on the webpage to find one the
 
 ### V. [Testing](#testing)
 
-### VI. [Deployment](#deployment)
+### VI. [Future Features](#future)
 
-### VII. [Credits](#credits)
+### VII. [Deployment](#deployment)
+
+### VIII. [Credits](#credits)
 
 <br><br>
 
@@ -187,7 +189,7 @@ The message telling you to log in or register.
 
 <h2><img src="./docs/images/delete_confirm_modal.jpg" alt="A Picture of a Modal asking to confirm the deletion of an event"></h2><br>
 
-- Event Creation and Modification are limited to give people time to adjust to attend or adjust to the changes. An event needs to be created at least 12 hours before it is taking place. The same holds true if you want to modify an event. In case the starting time is closer than 12 hours, you will be prompted to update the Location_Time when modifying your event.
+- Event Creation and Modification are limited to give people time to adjust to attend or adjust to the changes. An event needs to be created at least 12 hours before it is taking place. The same holds true if you want to modify an event. In case the starting time is closer than 12 hours, you will be prompted to update the Location Time when modifying your event.
 
 <h2><img src="./docs/images/time_limit_form.jpg" alt="A Picture of a Form Feedback Message that the Event needs to start at a later date"></h2><br>
 
@@ -237,6 +239,11 @@ Confirmation message after modifying an event.<br>
     - As a host for static and media files
 1. [Crispy Forms](https://django-crispy-forms.readthedocs.io/en/latest/)
     - For styling login, register, create an event, modify an event and browse filter forms
+1. [Crispy Bootstrap5](https://github.com/django-crispy-forms/crispy-bootstrap5)
+    - To make Crispy Forms work together with Bootstrap 5
+1. [Coverage](https://pypi.org/project/coverage/)
+    - To generate a report of the code coverage of automatic tests
+
 
 ### Frameworks, Libraries & Programs Used
 
@@ -348,6 +355,16 @@ The remaining 2% is code that will never happen but has been implemented for bes
   <h2><img src="./docs/images/best_practices.jpg" alt="Picture of the Issues with Best Practices from Google Lighthouse"></h2><br>
 - The Issue doesn't actually show up in the Issues Panel at all. The only thing visible is a warning related to navigator.userAgent.
   <h2><img src="./docs/images/warning.jpg" alt="Picture of the warning in the Issues Panel"></h2>
+<br><br>
+
+## ([^](#tableofcontents)) <a name="future">Future Features</a>
+
+1. User Profile: Implementing a User Profile would set the baseline for other Features and give the registered Site Users an Option to Update their Information, change their Password, or enable/disable notifications.
+2. Theme Switching: This would give the registered Site User to switch from a brighter to a darker theme that is easier on the eyes. Many Social Sites like Twitter have already implemented a dark mode into their website.
+3. Adding and Removing Categories: Currently, we have 5 hard-coded Categories. For the expandability of the project, it will later be essential, that the Superuser can add and remove categories on the fly. This would require some recoding of the Browse/Filter Page.
+4. Attendee management for Event Creator: Currently, only the Admin can see the name of Event Attendees in the Admin Panel for privacy reasons. We do not want Users to stalk other Event Attendees by seeing their names in Event Details. However, it may be a good idea to offer the Event Creator the list of the Attendees as well as the option to remove an Attendee or restrict it by adding a maximum number of attendees to an event.
+5. Notification for Event Attendees: With a User Profile in Place, there is the possibility of notifying registered Site Users of changes to an event, either when they got removed as an attendee by the event creator, or the event creator modified/deleted the event.
+
 <br><br>
 
 ## ([^](#tableofcontents)) <a name="deployment">Deployment</a>
