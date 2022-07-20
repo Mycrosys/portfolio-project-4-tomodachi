@@ -96,16 +96,16 @@ They are also able to browse all events available on the webpage to find one the
     -   #### Site User
 
         1. As a Site User, I can register an account so that I can create/join and view details of events.
-        2. As a registered Site User, I can create my events so that I can share them with other site users.
-        3. As a registered Site User, and Event Creator I can delete my existing events so that I can remove them from the website.
-        4. As a registered Site User, and Event Creator I can edit/modify my existing events so that I can update their information.
-        5. As a registered Site User, I can view and browse Events so that I can find out more information about them.
-        6. As a registered Site User, I can join events so that I can show other users I will attend these.
-        7. As a registered Site User, I can leave events I have joined before so that I can show other users I will no longer attend said event.
-        8. As a registered Site User, I can search for events so that I can find events I want to join.
-        9. As a registered Site User, I can see the Username I am logged in with so that I know that I am logged in with the correct Username.
+        2. As a registered Site User, I can log in and log out so that I can use the main features of the Site while seeing my logged-in Username.
+        3. As a registered Site User, I can create my events so that I can share them with other site users.
+        4. As a registered Site User, and Event Creator I can delete my existing events so that I can remove them from the website.
+        5. As a registered Site User, and Event Creator I can edit/modify my existing events so that I can update their information.
+        6. As a registered Site User, I can view and browse Events so that I can find out more information about them.
+        7. As a registered Site User, I can join events so that I can show that I will attend these.
+        8. As a registered Site User, I can leave events I have joined before so that I can show that I will no longer attend said event.
+        9. As a registered Site User, I can search for events so that I can find events I want to join.
         10. As a registered Site User, I can quickly and easily distinguish Events I have created or joined in a list so that I can more easily find new events I am not involved with yet.
-        11. As a registered Site User, I can see Feedback Messages about my Actions so that I receive a visual confirmation, that my action was successful.
+        11. As a registered Site user, I can see Feedback Messages about my Actions so that I receive a visual confirmation, that my action was successful.
 
     -   #### Site Admin
 
@@ -115,7 +115,13 @@ They are also able to browse all events available on the webpage to find one the
 
 *   ### <a name="agile">Agile Methodology</a>
 
-    - Development of this project was managed using GitHub Projects which can be found [here](https://github.com/Mycrosys/portfolio-project-4-tomodachi/issues?q=is%3Aissue).
+    - The Development of this project was managed using GitHub Projects.
+        1. [The Project](https://github.com/Mycrosys/portfolio-project-4-tomodachi/projects/1)
+        2. [Epics](https://github.com/Mycrosys/portfolio-project-4-tomodachi/issues?q=label%3Aepic)
+        3. [User Stories](https://github.com/Mycrosys/portfolio-project-4-tomodachi/issues?q=label%3Auser-story)
+        4. [Tasks](https://github.com/Mycrosys/portfolio-project-4-tomodachi/issues?q=label%3Atask)
+    - Each Epic has the related User Stories written in its description. Likewise, User Stories have their related Tasks written in their comments.
+    - The Backlog Tab in the Project contains Features that may be implemented in a future iteration of the development cycle. More about them can be found in the section [Future Features](#future) in this readme.
 
 <br>
 
@@ -174,7 +180,7 @@ They are also able to browse all events available on the webpage to find one the
 
 The Navbar with a logged-in User.
 <h2><img src="./docs/images/navbar_logged_in.jpg" alt="A Picture of the Website showing the message that you need to be logged in to view that Page"></h2><br>
-The message telling you to log in or register.
+The message tells you to log in or register.
 <h2><img src="./docs/images/not_logged_in.jpg" alt="A Picture of the Website showing the message that you need to be logged in to view that Page"></h2><br>
 
 ###   Color Coded display of Events, Information Icons
@@ -345,8 +351,8 @@ Both the Pixel 6 displayed the site perfectly in normal and Landscape mode on Go
     - 1 Test, if the Form Fields in the Metaclass are explicit
 2. The Tests are run by typing "python3 manage.py test" in the Terminal.
 3. Results: <h2><img src="./docs/images/automatic_tests_results.jpg" alt="Picture of the Results of automatic Tests in Django"></h2>
-4. Coverage: <h2><img src="./docs/images/automatic_tests_coverage.jpg" alt="Picture of the Coverage of automatic Tests in Django"></h2>
-The remaining 2% is code that will never happen but has been implemented for best practice to catch invalid submissions like in all views. The submission in this specific case however has been coded to always create a valid result, so this code can not be covered with automatic testing.
+4. Coverage: <h2><img src="./docs/images/automatic_tests_coverage.jpg" alt="Picture of the Coverage of automatic Tests in Django"></h2><br>
+The remaining 1% is code that will never happen but has been implemented for best practice to catch invalid submissions like in all views. The submission in this specific case however has been coded to always create a valid result, so this code can not be covered with automatic testing.
 
 <br>
 
@@ -359,7 +365,7 @@ The remaining 2% is code that will never happen but has been implemented for bes
 
 ## ([^](#tableofcontents)) <a name="future">Future Features</a>
 
-1. User Profile: Implementing a User Profile would set the baseline for other Features and give the registered Site Users an Option to Update their Information, change their Password, or enable/disable notifications.
+1. User Profiles (EPIC): Implementing a User Profile would set the baseline for other Features and give the registered Site Users an Option to Update their Information, change their Passwords, or enable/disable notifications.
 2. Theme Switching: This would give the registered Site User to switch from a brighter to a darker theme that is easier on the eyes. Many Social Sites like Twitter have already implemented a dark mode into their website.
 3. Adding and Removing Categories: Currently, we have 5 hard-coded Categories. For the expandability of the project, it will later be essential, that the Superuser can add and remove categories on the fly. This would require some recoding of the Browse/Filter Page.
 4. Attendee management for Event Creator: Currently, only the Admin can see the name of Event Attendees in the Admin Panel for privacy reasons. We do not want Users to stalk other Event Attendees by seeing their names in Event Details. However, it may be a good idea to offer the Event Creator the list of the Attendees as well as the option to remove an Attendee or restrict it by adding a maximum number of attendees to an event.
