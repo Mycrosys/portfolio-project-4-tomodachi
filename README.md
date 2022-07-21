@@ -334,6 +334,21 @@ Both the Pixel 6 displayed the site perfectly in normal and Landscape mode on Go
 
 <br>
 
+### Javascript Testing (manual)
+
+- The Page does not contain a lot of Javascript and most of it has already been mentioned in the [Features](#features) section of the Readme. For the sake of completion, it is however mentioned here again.
+
+    1. Redirecting to the Home Page in Case of accessing a page a non-authorized User isn't meant to be on.
+        - All links provide a small message that prompts the user to sign in or sign up and redirect to the Home Page after a couple of seconds. This has been tested manually on Mobile and Desktop devices and many different Browsers.
+    2. Closing Messages after a certain time has passed without the need of the User to manually close it.
+        - This has also manually been tested on multiple devices and Browsers. The Message fades away after a couple of seconds, no matter what kind of message it is.
+    3. Creating and Modifying an Event needs to be done with the Location Time (the time the event takes place) being at least 12 hours in the future.
+        - The Form can not be submitted until this condition is met, both when creating and modifying an event. An appropriate Message is prompting the User with the earliest time the event can take place. A Screen of that message can be found in the [Features](#features) section as well.
+
+
+<br>
+
+
 ### Automated Testing (Django Testcase)
 
 1. A total of 39 automatic tests were written to test the Forms, the Model, and the Views extensively. The Tests are as follows:
@@ -457,6 +472,9 @@ Click [Here](https://help.github.com/en/github/creating-cloning-and-archiving-re
 
 - The Sites Favicon next to the Websites Name in the Tab was created with the [Favicon Generator](https://favicon.io/favicon-generator/).
 
+### Code
+
+- At the beginning of the project, part of the CSS, Template, and View code was taken from the Walkthrough Projects "Hello Django" and "I Think Therefore I Blog" to have a working baseline. Throughout the project, that code was heavily modified so that it is hard to find code that still matches, aside from some class/method names in the View and CSS.
 
 ### Acknowledgments
 
